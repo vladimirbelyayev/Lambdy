@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+		<PackageId>Lambdy</PackageId>
+        <Authors>Vladimir Belyayev</Authors>
+        <PackageDescription>Library for building SQL from Lambda expressions, for use in conjunction with Micro-ORMs</PackageDescription>
+        <RepositoryUrl>https://github.com/vladimirbelyayev/Lambdy</RepositoryUrl>
+    </PropertyGroup>
+
+</Project>
