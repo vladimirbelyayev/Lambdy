@@ -5,10 +5,16 @@
 		<PackageId>Lambdy</PackageId>
         <Authors>Vladimir Belyayev</Authors>
         <PackageDescription>Library for building SQL from Lambda expressions, for use in conjunction with Micro-ORMs</PackageDescription>
-        <PackageTags>Lambda;Sql;Lambda-SQL;LambdaSql;Lambdy;ExpressionTreeSql;ExpressionSql</PackageTags>
+        <PackageReleaseNotes>https://github.com/vladimirbelyayev/Lambdy</PackageReleaseNotes>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageTags>Lambda;Sql;Lambda-SQL;LambdaSql;LambdaExpressionSql;Lambdy;ExpressionTreeSql;ExpressionSql</PackageTags>
         <PackageProjectUrl>https://github.com/vladimirbelyayev/Lambdy</PackageProjectUrl>
         <RepositoryUrl>https://github.com/vladimirbelyayev/Lambdy</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
+
+    <ItemGroup>
+        <None Include="..\LICENSE" Pack="true" Visible="false" PackagePath=""/>
+    </ItemGroup>
 </Project>
