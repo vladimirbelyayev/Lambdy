@@ -10,7 +10,8 @@ namespace Lambdy.Tests.Templating
         [Fact]
         public void CustomTemplateShouldBeUsed()
         {
-            var customTemplateText = "CustomTemplateString";
+            var customTemplateText = "SELECT Table.Id " +
+                                     "FROM Person Table ";
             var customTemplate = $"{customTemplateText} " +
                                  $"{LambdyTemplateTokens.Where}";
             
