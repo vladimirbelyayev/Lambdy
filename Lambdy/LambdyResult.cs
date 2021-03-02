@@ -2,7 +2,7 @@
 
 namespace Lambdy
 {
-    public class LambdaSqlResult
+    public class LambdyResult
     {
         public string Sql { get; set; }
         

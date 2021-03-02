@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Lambdy.ExpressionNodes.Abstract;
 using Lambdy.Resolvers.ExpressionResolvers;
 using Lambdy.Resolvers.ExpressionResolvers.Abstract;
+using Lambdy.TreeNodes.ExpressionNodes.Abstract;
 
 namespace Lambdy.Resolvers
 {
@@ -48,7 +48,7 @@ namespace Lambdy.Resolvers
             { ExpressionType.MemberAccess, MemberExpressionResolver }
         };
         
-        public static Node ResolveExpression(Expression expression)
+        public static ExpressionNode ResolveExpression(Expression expression)
         {
             try
             {

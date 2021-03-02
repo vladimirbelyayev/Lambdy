@@ -1,10 +1,10 @@
-﻿using Lambdy.ExpressionNodes.Abstract;
+﻿using Lambdy.TreeNodes.ExpressionNodes.Abstract;
 using Lambdy.ValueObjects;
-using Lambdy.Visitors.Abstract;
+using Lambdy.Visitors.ExpressionNodeSql.Abstract;
 
-namespace Lambdy.ExpressionNodes
+namespace Lambdy.TreeNodes.ExpressionNodes
 {
-    internal class LikeNode : Node
+    internal class LikeNode : ExpressionNode
     {
         public LikeMethod Method { get; set; }
         public MemberNode MemberNode { get; set; }

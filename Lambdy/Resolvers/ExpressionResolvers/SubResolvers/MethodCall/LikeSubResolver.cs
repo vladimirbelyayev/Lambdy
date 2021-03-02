@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Lambdy.ExpressionNodes;
-using Lambdy.ExpressionNodes.Abstract;
 using Lambdy.Resolvers.NameResolvers;
+using Lambdy.TreeNodes.ExpressionNodes;
+using Lambdy.TreeNodes.ExpressionNodes.Abstract;
 using Lambdy.ValueObjects;
 
 namespace Lambdy.Resolvers.ExpressionResolvers.SubResolvers.MethodCall
 {
     internal class LikeSubResolver
     {
-        public Node ResolveExpression(MethodCallExpression callExpression)
+        public ExpressionNode ResolveExpression(MethodCallExpression callExpression)
         {
             var member = (MemberExpression) callExpression.Object;
-            var fieldValue = ExpressionValueResolverMediator.GetValue(callExpression.Arguments.First());
+            var fieldValue = ExpressionValueResolverMediator.GetValue(callExpression.Arguments[0]);
             
             var callFunction = (LikeMethod) Enum.Parse(typeof(LikeMethod), callExpression.Method.Name, true);
                 

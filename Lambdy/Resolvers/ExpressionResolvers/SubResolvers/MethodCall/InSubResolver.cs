@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Linq.Expressions;
-using Lambdy.ExpressionNodes;
-using Lambdy.ExpressionNodes.Abstract;
 using Lambdy.Resolvers.NameResolvers;
+using Lambdy.TreeNodes.ExpressionNodes;
+using Lambdy.TreeNodes.ExpressionNodes.Abstract;
 
 namespace Lambdy.Resolvers.ExpressionResolvers.SubResolvers.MethodCall
 {
     internal class InSubResolver
     {
-        public Node ResolveExpression(MethodCallExpression methodCallExpression)
+        public ExpressionNode ResolveExpression(MethodCallExpression methodCallExpression)
         {
             Expression collectionExpression;
             MemberExpression memberExpression;
@@ -16,12 +16,12 @@ namespace Lambdy.Resolvers.ExpressionResolvers.SubResolvers.MethodCall
             if (methodCallExpression.Method.DeclaringType == typeof(Enumerable))
             {
                 collectionExpression = methodCallExpression.Arguments[0];
-                memberExpression = methodCallExpression.Arguments[1] as MemberExpression;
+                memberExpression = (MemberExpression) methodCallExpression.Arguments[1];
             }
             else
             {
                 collectionExpression = methodCallExpression.Object;
-                memberExpression = methodCallExpression.Arguments[0] as MemberExpression;
+                memberExpression = (MemberExpression) methodCallExpression.Arguments[0];
             }
 
             var value = ExpressionValueResolverMediator.GetValue(collectionExpression);

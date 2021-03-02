@@ -1,9 +1,9 @@
-﻿using Lambdy.ExpressionNodes.Abstract;
-using Lambdy.Visitors.Abstract;
+﻿using Lambdy.TreeNodes.ExpressionNodes.Abstract;
+using Lambdy.Visitors.ExpressionNodeSql.Abstract;
 
-namespace Lambdy.ExpressionNodes
+namespace Lambdy.TreeNodes.ExpressionNodes
 {
-    internal class ValueNode : Node
+    internal class ValueNode : ExpressionNode
     {
         public object Value { get; set; }
         

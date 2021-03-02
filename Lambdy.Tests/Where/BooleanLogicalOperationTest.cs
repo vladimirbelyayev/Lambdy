@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Lambdy.Tests.Constants;
 using Lambdy.Tests.TestModels.Tables;
 using Xunit;
 
@@ -9,7 +10,7 @@ namespace Lambdy.Tests.Where
         [Fact]
         public void AndShouldBeCreated()
         {
-            var expectedResult = $" AND ";
+            var expectedResult = $" {SqlBooleanLogicalOperators.And} ";
 
             var sqlResult = LambdyQuery
                 .Create(new
@@ -27,7 +28,7 @@ namespace Lambdy.Tests.Where
         [Fact]
         public void OrShouldBeCreated()
         {
-            var expectedResult = $" OR ";
+            var expectedResult = $" {SqlBooleanLogicalOperators.Or} ";
 
             var sqlResult = LambdyQuery
                 .Create(new
@@ -45,7 +46,7 @@ namespace Lambdy.Tests.Where
         [Fact]
         public void NotShouldBeCreated()
         {
-            var expectedResult = $"NOT ";
+            var expectedResult = $"{SqlBooleanLogicalOperators.Not} ";
 
             var sqlResult = LambdyQuery
                 .Create(new

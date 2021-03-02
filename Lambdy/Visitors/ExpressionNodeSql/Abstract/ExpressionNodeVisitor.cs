@@ -1,6 +1,6 @@
-﻿using Lambdy.ExpressionNodes;
+﻿using Lambdy.TreeNodes.ExpressionNodes;
 
-namespace Lambdy.Visitors.Abstract
+namespace Lambdy.Visitors.ExpressionNodeSql.Abstract
 {
     internal abstract class ExpressionNodeVisitor<TResult>
     {

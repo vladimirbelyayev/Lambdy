@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Lambdy.ExpressionNodes;
-using Lambdy.ExpressionNodes.Abstract;
 using Lambdy.Resolvers.ExpressionResolvers.Abstract;
 using Lambdy.Resolvers.NameResolvers;
+using Lambdy.TreeNodes.ExpressionNodes;
+using Lambdy.TreeNodes.ExpressionNodes.Abstract;
 
 namespace Lambdy.Resolvers.ExpressionResolvers
 {
     internal class MemberExpressionResolver : ExpressionResolver
     {
-        public override Node ResolveExpression(Expression expression)
+        public override ExpressionNode ResolveExpression(Expression expression)
         {
-            return ResolveExpression((MemberExpression) expression, null);
+            var memberExpression = (MemberExpression) expression;
+            return ResolveExpression(memberExpression, memberExpression);
         }
 
-        private static Node ResolveExpression(MemberExpression memberExpression, MemberExpression rootExpression)
+        private static ExpressionNode ResolveExpression(MemberExpression memberExpression, MemberExpression rootExpression)
         {
-            if (rootExpression == null)
-            {
-                rootExpression = memberExpression;
-            }
-
             if (memberExpression.Expression == null)
             {
                 return new ValueNode
