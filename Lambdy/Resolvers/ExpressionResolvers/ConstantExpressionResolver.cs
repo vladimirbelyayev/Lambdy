@@ -1,16 +1,18 @@
 ﻿using System.Linq.Expressions;
-using Lambdy.ExpressionNodes;
-using Lambdy.ExpressionNodes.Abstract;
 using Lambdy.Resolvers.ExpressionResolvers.Abstract;
+using Lambdy.TreeNodes.ExpressionNodes;
+using Lambdy.TreeNodes.ExpressionNodes.Abstract;
 
 namespace Lambdy.Resolvers.ExpressionResolvers
 {
     internal class ConstantExpressionResolver : ExpressionResolver
     {
-        public override Node ResolveExpression(Expression expression)
+        public override ExpressionNode ResolveExpression(Expression expression)
         {
-            var value = ExpressionValueResolverMediator.GetValue(expression);
-            return new ValueNode { Value = value };
+            return new ValueNode
+            {
+                Value = ExpressionValueResolverMediator.GetValue(expression)
+            };
         }
     }
 }

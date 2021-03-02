@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Linq;
 using System.Linq.Expressions;
-using Lambdy.ExpressionNodes.Abstract;
 using Lambdy.Resolvers.ExpressionResolvers.Abstract;
 using Lambdy.Resolvers.ExpressionResolvers.SubResolvers.MethodCall;
+using Lambdy.TreeNodes.ExpressionNodes.Abstract;
 using Lambdy.ValueObjects;
 
 namespace Lambdy.Resolvers.ExpressionResolvers
@@ -13,9 +13,9 @@ namespace Lambdy.Resolvers.ExpressionResolvers
     {
         private readonly LikeSubResolver _likeResolver = new LikeSubResolver();
         private readonly InSubResolver _inResolver = new InSubResolver();
-        private readonly MethodResultResolver _resultResolver = new MethodResultResolver();
+        private readonly MethodResultSubResolver _resultSubResolver = new MethodResultSubResolver();
 
-        public override Node ResolveExpression(Expression expression)
+        public override ExpressionNode ResolveExpression(Expression expression)
         {
             var methodCallExpression = (MethodCallExpression) expression;
             
@@ -30,7 +30,7 @@ namespace Lambdy.Resolvers.ExpressionResolvers
                 return _inResolver.ResolveExpression(methodCallExpression);
             } 
 
-            return _resultResolver.ResolveExpression(methodCallExpression);
+            return _resultSubResolver.ResolveExpression(methodCallExpression);
         }
     }
 }

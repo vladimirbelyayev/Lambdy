@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
-using Lambdy.Constants;
-using Lambdy.ExpressionNodes;
+using Lambdy.Constants.Sql;
+using Lambdy.Parameters;
+using Lambdy.TreeNodes.ExpressionNodes;
 using Lambdy.ValueObjects;
-using Lambdy.Visitors.Abstract;
+using Lambdy.Visitors.ExpressionNodeSql.Abstract;
 
-namespace Lambdy.Visitors
+namespace Lambdy.Visitors.ExpressionNodeSql
 {
     internal class ExpressionNodeSqlVisitor : ExpressionNodeVisitor<string>
     {
@@ -33,10 +34,11 @@ namespace Lambdy.Visitors
             };
         
 
-        private readonly ParameterTracker _parameterTracker;
-        public ExpressionNodeSqlVisitor(ParameterTracker paramTracker)
+        public ParameterTracker ParameterTracker { get; private set; }
+
+        public void SetParameterTracker(ParameterTracker parameterTracker)
         {
-            _parameterTracker = paramTracker;
+            ParameterTracker = parameterTracker;
         }
         
         public override string VisitInNode(InNode inNode)
@@ -48,8 +50,12 @@ namespace Lambdy.Visitors
 
         public override string VisitLikeNode(LikeNode likeNode)
         {
+            var likeSqlExpression = string.Format(
+                LikeDictionary[likeNode.Method],
+                likeNode.Value.Accept(this));
+            
             return $"{likeNode.MemberNode.Accept(this)} " +
-                   $"{string.Format(LikeDictionary[likeNode.Method], likeNode.Value.Accept(this))}";
+                   $"{likeSqlExpression}";
         }
 
         public override string VisitMemberNode(MemberNode memberNode)
@@ -72,7 +78,7 @@ namespace Lambdy.Visitors
 
         public override string VisitValueNode(ValueNode valueNode)
         {
-            return _parameterTracker.AddParameter(valueNode.Value);
+            return ParameterTracker.AddParameter(valueNode.Value);
         }
     }
 }

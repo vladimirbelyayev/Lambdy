@@ -1,13 +1,13 @@
 ﻿using System.Linq.Expressions;
-using Lambdy.ExpressionNodes.Abstract;
-using Lambdy.Visitors.Abstract;
+using Lambdy.TreeNodes.ExpressionNodes.Abstract;
+using Lambdy.Visitors.ExpressionNodeSql.Abstract;
 
-namespace Lambdy.ExpressionNodes
+namespace Lambdy.TreeNodes.ExpressionNodes
 {
-    internal class SingleOperationNode : Node
+    internal class SingleOperationNode : ExpressionNode
     {
         public ExpressionType Operator { get; set; }
-        public Node Child { get; set; }
+        public ExpressionNode Child { get; set; }
         
         public override T Accept<T>(ExpressionNodeVisitor<T> visitor)
         {

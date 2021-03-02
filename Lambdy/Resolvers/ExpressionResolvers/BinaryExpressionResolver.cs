@@ -1,26 +1,23 @@
 ﻿using System.Linq.Expressions;
-using Lambdy.ExpressionNodes;
-using Lambdy.ExpressionNodes.Abstract;
 using Lambdy.Resolvers.ExpressionResolvers.Abstract;
+using Lambdy.TreeNodes.ExpressionNodes;
+using Lambdy.TreeNodes.ExpressionNodes.Abstract;
 
 namespace Lambdy.Resolvers.ExpressionResolvers
 {
     internal class BinaryExpressionResolver : ExpressionResolver
     {
-        public override Node ResolveExpression(Expression expression)
+        public override ExpressionNode ResolveExpression(Expression expression)
         {
             var binaryExpression = (BinaryExpression) expression;
-            var left = ExpressionResolverMediator
-                .ResolveExpression(binaryExpression.Left);
 
-            var right = ExpressionResolverMediator
-                .ResolveExpression(binaryExpression.Right);
-            
             return new OperationNode
             {
-                Left = left,
+                Left = ExpressionResolverMediator
+                    .ResolveExpression(binaryExpression.Left),
                 Operator = binaryExpression.NodeType,
-                Right = right
+                Right = ExpressionResolverMediator
+                    .ResolveExpression(binaryExpression.Right)
             };
         }
     }

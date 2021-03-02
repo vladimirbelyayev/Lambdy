@@ -2,19 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-		<PackageId>Lambdy</PackageId>
+        <PackageId>Lambdy</PackageId>
         <Authors>Vladimir Belyayev</Authors>
         <PackageDescription>Library for building SQL from Lambda expressions, for use in conjunction with Micro-ORMs</PackageDescription>
         <PackageReleaseNotes>https://github.com/vladimirbelyayev/Lambdy</PackageReleaseNotes>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageTags>Lambda;Sql;Lambda-SQL;LambdaSql;LambdaExpressionSql;Lambdy;ExpressionTreeSql;ExpressionSql</PackageTags>
-        <PackageProjectUrl>https://github.com/vladimirbelyayev/Lambdy</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/vladimirbelyayev/Lambdy</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
-
-
+    
     <ItemGroup>
-        <None Include="..\LICENSE" Pack="true" Visible="false" PackagePath=""/>
+        <None Include="..\LICENSE" Pack="true" Visible="false" PackagePath="" />
     </ItemGroup>
+    
 </Project>

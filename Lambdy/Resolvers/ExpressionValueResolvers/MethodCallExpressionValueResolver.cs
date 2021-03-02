@@ -16,7 +16,7 @@ namespace Lambdy.Resolvers.ExpressionValueResolvers
             
             var obj = callExpression.Object != null 
                 ? ExpressionValueResolverMediator.GetValue(callExpression.Object) 
-                : arguments.First();
+                : arguments[0];
 
             return callExpression.Method.Invoke(obj, arguments);
         }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lambdy
+namespace Lambdy.Parameters
 {
     internal class ParameterTracker
     {
