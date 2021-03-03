@@ -39,7 +39,15 @@ namespace Lambdy
             return this;
         }
 
-        public LambdyBuilder<TModel> Template(string sqlTemplate)
+        public LambdyBuilder<TModel> Select<TSelectModel>(Expression<Func<TModel, TSelectModel>> expression)
+        {
+            _selectClause.Node = ExpressionResolverMediator
+                .ResolveExpression(expression.Body);
+
+            return this;
+        }
+
+        public LambdyBuilder<TModel> WithTemplate(string sqlTemplate)
         {
             _customTemplate = sqlTemplate;
             return this;

@@ -15,7 +15,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Name)} {SqlComparisionOperators.In} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -34,7 +34,7 @@ namespace Lambdy.Tests.Where
             var arr = new[] {"1", "2", "3", "5"};
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -52,7 +52,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Name)} {SqlComparisionOperators.In} ";
 
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -71,7 +71,7 @@ namespace Lambdy.Tests.Where
             var list = new List<string>() {"1", "2", "3", "5"};
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })

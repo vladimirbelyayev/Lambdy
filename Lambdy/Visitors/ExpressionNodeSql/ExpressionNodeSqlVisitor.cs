@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using Lambdy.Constants.Sql;
 using Lambdy.Parameters;
 using Lambdy.TreeNodes.ExpressionNodes;
@@ -8,6 +10,7 @@ using Lambdy.Visitors.ExpressionNodeSql.Abstract;
 
 namespace Lambdy.Visitors.ExpressionNodeSql
 {
+    //TODO: Use string builder instead of return/Concat string in recursive methods
     internal class ExpressionNodeSqlVisitor : ExpressionNodeVisitor<string>
     {
         private static readonly IReadOnlyDictionary<ExpressionType, string> OperationDictionary =
@@ -32,8 +35,15 @@ namespace Lambdy.Visitors.ExpressionNodeSql
                 {LikeMethod.EndsWith, $"{SqlComparisionOperators.Like} {SqlFunctions.Concat}({0},'%')"},
                 {LikeMethod.StartsWith,$"{SqlComparisionOperators.Like} {SqlFunctions.Concat}('%',{0})"},
             };
-        
 
+        // ReSharper disable once NotAccessedField.Local This will be used later on
+        private readonly StringBuilder _stringBuilder;
+
+        public ExpressionNodeSqlVisitor(StringBuilder stringBuilder)
+        {
+            _stringBuilder = stringBuilder;
+        }
+        
         public ParameterTracker ParameterTracker { get; private set; }
 
         public void SetParameterTracker(ParameterTracker parameterTracker)
@@ -79,6 +89,29 @@ namespace Lambdy.Visitors.ExpressionNodeSql
         public override string VisitValueNode(ValueNode valueNode)
         {
             return ParameterTracker.AddParameter(valueNode.Value);
+        }
+
+        public override string VisitConstructorNode(ConstructorNode constructorNode)
+        {
+            var nodeStrings = constructorNode
+                .ConstructorArgumentNodes
+                .Select(x => x.Accept(this));
+            
+            return string.Join(
+                ", ", 
+                nodeStrings);
+        }
+
+        public override string VisitConstructorArgumentNode(ConstructorArgumentNode constructorArgumentNodeNode)
+        {
+            return $"{constructorArgumentNodeNode.Right.Accept(this)} " +
+                   $"{SqlAliasKeywords.As} " +
+                   $"{constructorArgumentNodeNode.Left.Accept(this)}";
+        }
+
+        public override string VisitConstructorMemberNode(ConstructorMemberNode constructorNode)
+        {
+            return constructorNode.FieldName;
         }
     }
 }

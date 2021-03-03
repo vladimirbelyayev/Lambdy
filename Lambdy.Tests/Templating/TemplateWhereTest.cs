@@ -13,7 +13,7 @@ namespace Lambdy.Tests.Templating
             var expectedResult = $"{SqlClauses.Where} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })

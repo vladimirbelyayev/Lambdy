@@ -6,12 +6,12 @@ namespace Lambdy
     {
         private static readonly QueryCompiler QueryCompiler = new QueryCompiler();
         
-        public static LambdyBuilder<TModel> Create<TModel>(TModel model) where TModel: class
+        public static LambdyBuilder<TModel> ByModel<TModel>(TModel model) where TModel: class
         {
-            return Create<TModel>();
+            return ByModel<TModel>();
         }
         
-        public static LambdyBuilder<TModel> Create<TModel>() where TModel: class
+        public static LambdyBuilder<TModel> ByModel<TModel>() where TModel: class
         {
             return new LambdyBuilder<TModel>(QueryCompiler);
         }

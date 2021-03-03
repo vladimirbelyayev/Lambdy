@@ -14,7 +14,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Name)} {SqlComparisionOperators.Equal} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -33,7 +33,7 @@ namespace Lambdy.Tests.Where
             var variableToEqual = "test";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -51,7 +51,7 @@ namespace Lambdy.Tests.Where
             Action act = () =>
             {
                 LambdyQuery
-                    .Create(new
+                    .ByModel(new
                     {
                         Table = (Person) null
                     })
@@ -70,7 +70,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Age)} {SqlComparisionOperators.LessThan} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -88,7 +88,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Age)} {SqlComparisionOperators.LessThanOrEqual} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -106,7 +106,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Age)} {SqlComparisionOperators.GreaterThan} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -124,7 +124,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Age)} {SqlComparisionOperators.GreaterThanOrEqual} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -142,7 +142,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Age)} {SqlComparisionOperators.NotEqual} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -161,7 +161,7 @@ namespace Lambdy.Tests.Where
             var age = 5;
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })

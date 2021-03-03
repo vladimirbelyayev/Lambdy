@@ -1,4 +1,5 @@
-﻿using Lambdy.Visitors.ClauseSectionSql;
+﻿using System.Text;
+using Lambdy.Visitors.ClauseSectionSql;
 using Lambdy.Visitors.ExpressionNodeSql;
 
 namespace Lambdy.Compilers.Query
@@ -10,8 +11,11 @@ namespace Lambdy.Compilers.Query
 
         public QueryCompiler()
         {
-            _expressionNodeSqlVisitor = new ExpressionNodeSqlVisitor();
-            _clauseSectionSqlVisitor = new ClauseSectionSqlVisitor(_expressionNodeSqlVisitor);
+            var stringBuilder = new StringBuilder();
+            _expressionNodeSqlVisitor = new ExpressionNodeSqlVisitor(stringBuilder);
+            _clauseSectionSqlVisitor = new ClauseSectionSqlVisitor(
+                _expressionNodeSqlVisitor,
+                stringBuilder);
         }
         
         public LambdyResult Compile(QueryCompilerInput queryCompilerInput)

@@ -10,5 +10,10 @@ namespace Lambdy.Visitors.ExpressionNodeSql.Abstract
         public abstract TResult VisitOperationNode(OperationNode operationNode);
         public abstract TResult VisitSingleOperationNode(SingleOperationNode singleOperationNode);
         public abstract TResult VisitValueNode(ValueNode valueNode);
+        public abstract TResult VisitConstructorNode(ConstructorNode constructorNode);
+        
+        public abstract TResult VisitConstructorArgumentNode(ConstructorArgumentNode constructorNode);
+        
+        public abstract TResult VisitConstructorMemberNode(ConstructorMemberNode constructorNode);
     }
 }

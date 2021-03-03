@@ -23,10 +23,15 @@ namespace Lambdy.Resolvers
         
         private static readonly MemberExpressionResolver 
             MemberExpressionResolver = new MemberExpressionResolver();
+        
+        private static readonly NewExpressionResolver 
+            NewExpressionResolver = new NewExpressionResolver();
+        
 
         private static readonly IDictionary<ExpressionType, ExpressionResolver> Resolvers = 
             new Dictionary<ExpressionType, ExpressionResolver>
         {
+            // Query expressions
             { ExpressionType.Equal, BinaryExpressionResolver },
             { ExpressionType.NotEqual, BinaryExpressionResolver },
             { ExpressionType.LessThan, BinaryExpressionResolver },
@@ -45,7 +50,11 @@ namespace Lambdy.Resolvers
             { ExpressionType.Convert, UnaryExpressionResolver },
             { ExpressionType.Not, UnaryExpressionResolver },
             { ExpressionType.Call, MethodCallExpressionResolver },
-            { ExpressionType.MemberAccess, MemberExpressionResolver }
+            { ExpressionType.MemberAccess, MemberExpressionResolver },
+            
+            // Select expressions - these may be better off in separate resolver type,
+            // need to keep an eye on this if it's fine here
+            { ExpressionType.New, NewExpressionResolver }
         };
         
         public static ExpressionNode ResolveExpression(Expression expression)

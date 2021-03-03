@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Text;
 using Lambdy.Constants;
 using Lambdy.Constants.Sql;
 using Lambdy.TreeNodes.ClauseSectionNodes;
@@ -11,16 +11,21 @@ namespace Lambdy.Visitors.ClauseSectionSql
     internal class ClauseSectionSqlVisitor : ClauseSectionNodeVisitor
     {
         private readonly ExpressionNodeSqlVisitor _expressionNodeSqlVisitor;
+        private readonly StringBuilder _stringBuilder;
 
         public string Sql { get; private set; }
         
-        public ClauseSectionSqlVisitor(ExpressionNodeSqlVisitor expressionNodeSqlVisitor)
+        public ClauseSectionSqlVisitor(
+            ExpressionNodeSqlVisitor expressionNodeSqlVisitor,
+            StringBuilder stringBuilder)
         {
             _expressionNodeSqlVisitor = expressionNodeSqlVisitor;
+            _stringBuilder = stringBuilder;
         }
 
         public void SetTemplate(string sqlTemplate)
         {
+            _stringBuilder.Clear();
             Sql = sqlTemplate ?? DefaultSqlTemplate.Sql;
         }
         
@@ -38,28 +43,67 @@ namespace Lambdy.Visitors.ClauseSectionSql
                 string.Empty);
         }
 
-        public override void VisitSelectClause(SelectClauseNode inNode)
+        public override void VisitSelectClause(SelectClauseNode selectClauseNode)
         {
+            if (selectClauseNode.Node == null)
+            {
+                Sql = Sql.Replace(
+                    LambdyTemplateTokens.Select, 
+                    string.Empty);
+                return;
+            }
+            
+            _stringBuilder.Clear();
+            _stringBuilder.Append(SqlClauses.Select);
+            _stringBuilder.Append(' ');
+            
+            //TODO: Expression visitor should just append to existing string builder. 
+            _stringBuilder.Append(selectClauseNode.Node.Accept(_expressionNodeSqlVisitor));
+            
             Sql = Sql.Replace(
                 LambdyTemplateTokens.Select, 
-                string.Empty);
+                _stringBuilder.ToString());
         }
 
         public override void VisitWhereClause(WhereClauseNode whereClauseNode)
         {
-            var nodeStrings = whereClauseNode
-                .Nodes
-                .Select(x => $"({x.Accept(_expressionNodeSqlVisitor)})");
+            var nodeLength =  whereClauseNode.Nodes.Count;
+            if (nodeLength == 0)
+            {
+                Sql = Sql.Replace(
+                    LambdyTemplateTokens.Where,
+                    string.Empty);
+                return;
+            }
 
-            var joinedNodeStrings = string.Join(
-                $"{Environment.NewLine}{SqlBooleanLogicalOperators.And} ", 
-                nodeStrings);
+            _stringBuilder.Clear();
+            _stringBuilder.Append(SqlClauses.Where);
+            _stringBuilder.Append(' ');
             
-            var whereClause = $"{SqlClauses.Where} {joinedNodeStrings}{Environment.NewLine}";
+            var nodes = whereClauseNode.Nodes;
+            
+            for (var i = 0; i < nodeLength; i++)
+            {
+                _stringBuilder.Append('(');
+                
+                //TODO: Expression visitor should just append to existing string builder.  
+                _stringBuilder.Append(nodes[i].Accept(_expressionNodeSqlVisitor));
+                
+                _stringBuilder.Append(')');
 
+                _stringBuilder.Append(' ');
+                _stringBuilder.Append(SqlBooleanLogicalOperators.And);
+                _stringBuilder.Append(' ');
+            }
+
+            //Remove trailing AND
+            _stringBuilder.Remove(_stringBuilder.Length - 5, 5);
+            _stringBuilder.Append(Environment.NewLine);
+            
             Sql = Sql.Replace(
-                LambdyTemplateTokens.Where,
-                whereClause);
+                LambdyTemplateTokens.Where, 
+                _stringBuilder.ToString());
         }
+        
     }
 }

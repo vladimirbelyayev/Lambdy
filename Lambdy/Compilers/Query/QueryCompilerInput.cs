@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Lambdy.Parameters;
-using Lambdy.TreeNodes.ClauseSectionNodes;
+﻿using Lambdy.Parameters;
 using Lambdy.TreeNodes.ClauseSectionNodes.Abstract;
 
 namespace Lambdy.Compilers.Query
