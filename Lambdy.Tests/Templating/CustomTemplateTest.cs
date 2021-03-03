@@ -16,11 +16,11 @@ namespace Lambdy.Tests.Templating
                                  $"{LambdyTemplateTokens.Where}";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
-                .Template(customTemplate)
+                .WithTemplate(customTemplate)
                 .Where(x => x.Table.Name == "2")
                 .Compile();
 

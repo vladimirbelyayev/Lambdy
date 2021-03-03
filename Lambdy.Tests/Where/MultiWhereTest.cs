@@ -13,7 +13,7 @@ namespace Lambdy.Tests.Where
                                  $"+AND[\\n\\r\\s]+\\(Table.{nameof(Person.Name)} = @p_[0-9]+\\)";
 
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })

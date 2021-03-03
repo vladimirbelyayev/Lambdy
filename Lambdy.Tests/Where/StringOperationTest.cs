@@ -13,7 +13,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"Table.{nameof(Person.Name)} {SqlComparisionOperators.Like} ";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -32,7 +32,7 @@ namespace Lambdy.Tests.Where
             var testString = "Test";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })

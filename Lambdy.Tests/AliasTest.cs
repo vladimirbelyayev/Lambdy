@@ -13,7 +13,7 @@ namespace Lambdy.Tests
             var expectedResult = "T.Id";
             
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     TableOne = (Person) null,
                     T = (Address) null,

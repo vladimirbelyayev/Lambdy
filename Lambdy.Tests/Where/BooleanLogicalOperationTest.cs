@@ -13,7 +13,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $" {SqlBooleanLogicalOperators.And} ";
 
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -31,7 +31,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $" {SqlBooleanLogicalOperators.Or} ";
 
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
@@ -49,7 +49,7 @@ namespace Lambdy.Tests.Where
             var expectedResult = $"{SqlBooleanLogicalOperators.Not} ";
 
             var sqlResult = LambdyQuery
-                .Create(new
+                .ByModel(new
                 {
                     Table = (Person) null
                 })
