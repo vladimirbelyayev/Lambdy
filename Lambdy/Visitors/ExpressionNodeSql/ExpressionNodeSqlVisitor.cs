@@ -102,11 +102,11 @@ namespace Lambdy.Visitors.ExpressionNodeSql
                 nodeStrings);
         }
 
-        public override string VisitConstructorArgumentNode(ConstructorArgumentNode constructorArgumentNodeNode)
+        public override string VisitConstructorArgumentNode(ConstructorArgumentNode constructorArgumentNode)
         {
-            return $"{constructorArgumentNodeNode.Right.Accept(this)} " +
+            return $"{constructorArgumentNode.Right.Accept(this)} " +
                    $"{SqlAliasKeywords.As} " +
-                   $"{constructorArgumentNodeNode.Left.Accept(this)}";
+                   $"{constructorArgumentNode.Left.Accept(this)}";
         }
 
         public override string VisitConstructorMemberNode(ConstructorMemberNode constructorNode)
