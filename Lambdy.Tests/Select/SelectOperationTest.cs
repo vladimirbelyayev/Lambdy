@@ -12,8 +12,8 @@ namespace Lambdy.Tests.Select
         [Fact]
         public void SelectShouldBeCreated()
         {
-            var expectedResult = "SELECT Table.Name AS AliasName, " +
-                                 "Table.Surname AS AliasSurname, " +
+            var expectedResult = $"{SqlClauses.Select} Table.Name AS AliasName,[\\n\\r\\s]" +
+                                 "Table.Surname AS AliasSurname,[\\n\\r\\s]" +
                                  "Table2.AddressLine2 AS AddressLine";
             
             var sqlResult = LambdyQuery
@@ -35,7 +35,7 @@ namespace Lambdy.Tests.Select
 
             sqlResult.Sql
                 .Should()
-                .Contain(expectedResult);
+                .MatchRegex(expectedResult);
 
         }
     }

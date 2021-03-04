@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lambdy", "Lambdy\Lambdy.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lambdy.Tests", "Lambdy.Tests\Lambdy.Tests.csproj", "{3D19E8AD-7609-472D-BEEB-C30B97A59612}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lambdy.Performance.Benchmarks", "Lambdy.Performance.Benchmarks\Lambdy.Performance.Benchmarks.csproj", "{66E54D5E-E88E-4396-B979-19F74E20149E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3D19E8AD-7609-472D-BEEB-C30B97A59612}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D19E8AD-7609-472D-BEEB-C30B97A59612}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D19E8AD-7609-472D-BEEB-C30B97A59612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E54D5E-E88E-4396-B979-19F74E20149E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E54D5E-E88E-4396-B979-19F74E20149E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E54D5E-E88E-4396-B979-19F74E20149E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E54D5E-E88E-4396-B979-19F74E20149E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
