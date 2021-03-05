@@ -24,7 +24,8 @@ namespace Lambdy.Visitors.ExpressionNodeSql
                 {ExpressionType.LessThanOrEqual, SqlComparisionOperators.LessThanOrEqual},
                 {ExpressionType.AndAlso, SqlBooleanLogicalOperators.And},
                 {ExpressionType.OrElse, SqlBooleanLogicalOperators.Or},
-                {ExpressionType.Not, SqlBooleanLogicalOperators.Not}
+                {ExpressionType.Not, SqlBooleanLogicalOperators.Not},
+                {ExpressionType.Convert, string.Empty} //We do not do conversion operations, just pass value!
             };
         
         private static readonly IReadOnlyDictionary<LikeMethod, string> LikeDictionary =
