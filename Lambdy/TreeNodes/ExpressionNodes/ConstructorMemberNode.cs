@@ -7,9 +7,9 @@ namespace Lambdy.TreeNodes.ExpressionNodes
     {
         public string FieldName { get; set; }
         
-        public override T Accept<T>(ExpressionNodeVisitor<T> visitor)
+        public override void Accept(VoidExpressionNodeVisitor visitor)
         {
-            return visitor.VisitConstructorMemberNode(this);
+            visitor.VisitConstructorMemberNode(this);
         }
     }
 }

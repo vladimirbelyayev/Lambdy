@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Lambdy.Compilers.Query;
+using Lambdy.Compilers.Query.Abstract;
+using Lambdy.Compilers.Query.Input;
 using Lambdy.Parameters;
 using Lambdy.Resolvers;
 using Lambdy.TreeNodes.ClauseSectionNodes;

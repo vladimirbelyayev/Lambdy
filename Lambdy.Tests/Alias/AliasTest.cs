@@ -3,7 +3,7 @@ using FluentAssertions;
 using Lambdy.Tests.TestModels.Tables;
 using Xunit;
 
-namespace Lambdy.Tests
+namespace Lambdy.Tests.Alias
 {
     public class AliasTest
     {
@@ -11,6 +11,7 @@ namespace Lambdy.Tests
         public void CreateShouldAlias()
         {
             var expectedResult = "T.Id";
+            
             
             var sqlResult = LambdyQuery
                 .ByModel(new

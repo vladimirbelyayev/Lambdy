@@ -6,10 +6,10 @@ namespace Lambdy.TreeNodes.ExpressionNodes
     internal class ValueNode : ExpressionNode
     {
         public object Value { get; set; }
-        
-        public override T Accept<T>(ExpressionNodeVisitor<T> visitor)
+
+        public override void Accept(VoidExpressionNodeVisitor visitor)
         {
-            return visitor.VisitValueNode(this);
+            visitor.VisitValueNode(this);
         }
     }
 }

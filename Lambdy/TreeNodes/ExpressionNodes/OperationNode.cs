@@ -9,10 +9,10 @@ namespace Lambdy.TreeNodes.ExpressionNodes
         public ExpressionType Operator { get; set; }
         public ExpressionNode Left { get; set; }
         public ExpressionNode Right { get; set; }
-        
-        public override T Accept<T>(ExpressionNodeVisitor<T> visitor)
+
+        public override void Accept(VoidExpressionNodeVisitor visitor)
         {
-            return visitor.VisitOperationNode(this);
+            visitor.VisitOperationNode(this);
         }
     }
 }

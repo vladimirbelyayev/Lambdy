@@ -1,7 +1,7 @@
 ﻿using Lambdy.Parameters;
 using Lambdy.TreeNodes.ClauseSectionNodes.Abstract;
 
-namespace Lambdy.Compilers.Query
+namespace Lambdy.Compilers.Query.Input
 {
     internal class QueryCompilerInput
     {

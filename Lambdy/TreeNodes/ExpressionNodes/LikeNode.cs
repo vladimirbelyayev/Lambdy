@@ -9,10 +9,10 @@ namespace Lambdy.TreeNodes.ExpressionNodes
         public LikeMethod Method { get; set; }
         public MemberNode MemberNode { get; set; }
         public ValueNode Value { get; set; }
-        
-        public override T Accept<T>(ExpressionNodeVisitor<T> visitor)
+
+        public override void Accept(VoidExpressionNodeVisitor visitor)
         {
-            return visitor.VisitLikeNode(this);
+            visitor.VisitLikeNode(this);
         }
     }
 }
