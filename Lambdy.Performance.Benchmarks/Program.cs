@@ -1,5 +1,7 @@
-﻿using BenchmarkDotNet.Running;
-using Lambdy.Performance.Benchmarks.SampleBenchmarks;
+﻿using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Running;
+using Lambdy.Performance.Benchmarks.Benchmarks.SimpleAliasDapperVsLambdy;
+using Lambdy.Performance.Benchmarks.Benchmarks.SimpleAliasQuery;
 
 namespace Lambdy.Performance.Benchmarks
 {
@@ -7,7 +9,19 @@ namespace Lambdy.Performance.Benchmarks
     {
         private static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<Md5VsSha256>();
+            RunBenchmarks();
+        }
+
+        private static void RunBenchmarks()
+        {
+            var summary = BenchmarkRunner.Run<SimpleAliasDapperVsLambdyQueryBenchmark>();
+        }
+
+        // ReSharper disable once UnusedMember.Local
+        // Reason - if benchmark debug is needed switch method in Main to this
+        private static void DebugBenchmarks(string[] args)
+        {
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, new DebugInProcessConfig());
         }
     }
 }
