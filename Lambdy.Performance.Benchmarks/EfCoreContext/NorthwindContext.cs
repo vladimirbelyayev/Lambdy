@@ -1,11 +1,13 @@
-﻿using System;
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable PartialTypeWithSinglePart
+// ReSharper disable ClassNeverInstantiated.Global
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
 namespace Lambdy.Performance.Benchmarks.EfCoreContext
 {
+    // ReSharper disable once PartialTypeWithSinglePart
     public partial class NorthwindContext : DbContext
     {
         public NorthwindContext()
@@ -36,7 +38,9 @@ namespace Lambdy.Performance.Benchmarks.EfCoreContext
         {
             if (!optionsBuilder.IsConfigured)
             {
+#pragma warning disable 1030
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#pragma warning restore 1030
                 optionsBuilder.UseSqlite("DataSource=DataSource/Northwind_large.sqlite");
             }
         }
@@ -286,6 +290,7 @@ namespace Lambdy.Performance.Benchmarks.EfCoreContext
             OnModelCreatingPartial(modelBuilder);
         }
 
+        // ReSharper disable once PartialMethodWithSinglePart
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

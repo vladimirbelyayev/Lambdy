@@ -1,12 +1,12 @@
 ﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 using Lambdy.Performance.Benchmarks.Benchmarks.SimpleAliasDapperVsLambdy;
-using Lambdy.Performance.Benchmarks.Benchmarks.SimpleAliasQuery;
 
 namespace Lambdy.Performance.Benchmarks
 {
     internal static class Program
     {
+        // ReSharper disable once UnusedParameter.Local
         private static void Main(string[] args)
         {
             RunBenchmarks();
@@ -14,6 +14,7 @@ namespace Lambdy.Performance.Benchmarks
 
         private static void RunBenchmarks()
         {
+            // ReSharper disable once UnusedVariable
             var summary = BenchmarkRunner.Run<SimpleAliasDapperVsLambdyQueryBenchmark>();
         }
 
