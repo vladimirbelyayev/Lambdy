@@ -6,6 +6,6 @@ namespace Lambdy
     {
         public string Sql { get; set; }
         
-        public IReadOnlyDictionary<string, object> Parameters { get; set; }
+        public Dictionary<string, object> Parameters { get; set; }
     }
 }
