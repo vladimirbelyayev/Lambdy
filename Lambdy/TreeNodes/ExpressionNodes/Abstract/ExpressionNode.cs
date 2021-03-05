@@ -4,6 +4,6 @@ namespace Lambdy.TreeNodes.ExpressionNodes.Abstract
 {
     internal abstract class ExpressionNode
     {
-        public abstract T Accept<T>(ExpressionNodeVisitor<T> visitor);
+        public abstract void Accept(VoidExpressionNodeVisitor visitor);
     }
 }

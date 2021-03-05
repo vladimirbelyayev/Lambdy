@@ -6,10 +6,10 @@ namespace Lambdy.TreeNodes.ExpressionNodes
     internal class ConstructorNode : ExpressionNode
     {
         public ConstructorArgumentNode[] ConstructorArgumentNodes { get; set; }
-        
-        public override T Accept<T>(ExpressionNodeVisitor<T> visitor)
+
+        public override void Accept(VoidExpressionNodeVisitor visitor)
         {
-            return visitor.VisitConstructorNode(this);
+            visitor.VisitConstructorNode(this);
         }
     }
 }
