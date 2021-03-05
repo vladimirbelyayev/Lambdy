@@ -3,11 +3,11 @@
 // ReSharper disable ClassNeverInstantiated.Global
 #nullable disable
 
-namespace Lambdy.Performance.Benchmarks.EfCoreContext
+namespace Lambdy.Tests.TestModels.NorthwindTables
 {
-    public partial class Supplier
+    public partial class Customer
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }
@@ -18,6 +18,5 @@ namespace Lambdy.Performance.Benchmarks.EfCoreContext
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Fax { get; set; }
-        public string HomePage { get; set; }
     }
 }
