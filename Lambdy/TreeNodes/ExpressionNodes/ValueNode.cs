@@ -7,7 +7,7 @@ namespace Lambdy.TreeNodes.ExpressionNodes
     {
         public object Value { get; set; }
 
-        public override void Accept(VoidExpressionNodeVisitor visitor)
+        public override void Accept(ExpressionNodeVisitor visitor)
         {
             visitor.VisitValueNode(this);
         }

@@ -8,7 +8,7 @@ namespace Lambdy.TreeNodes.ExpressionNodes
         public ConstructorMemberNode Left { get; set; }
         public ExpressionNode Right { get; set; }
 
-        public override void Accept(VoidExpressionNodeVisitor visitor)
+        public override void Accept(ExpressionNodeVisitor visitor)
         {
             visitor.VisitConstructorArgumentNode(this);
         }

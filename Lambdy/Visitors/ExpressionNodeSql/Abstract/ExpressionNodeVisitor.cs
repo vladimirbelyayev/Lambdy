@@ -2,7 +2,7 @@
 
 namespace Lambdy.Visitors.ExpressionNodeSql.Abstract
 {
-    internal abstract class VoidExpressionNodeVisitor
+    internal abstract class ExpressionNodeVisitor
     {
         public abstract void VisitInNode(InNode inNode);
         public abstract void VisitLikeNode(LikeNode likeNode);
