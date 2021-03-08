@@ -9,7 +9,7 @@ using Lambdy.Visitors.ExpressionNodeSql.Abstract;
 
 namespace Lambdy.Visitors.ExpressionNodeSql
 {
-    internal class RecursiveNodeSqlVisitor : VoidExpressionNodeVisitor
+    internal class RecursiveNodeSqlVisitor : ExpressionNodeVisitor
     {
         private static readonly IReadOnlyDictionary<ExpressionType, string> OperationDictionary =
             new Dictionary<ExpressionType, string>()
@@ -121,11 +121,7 @@ namespace Lambdy.Visitors.ExpressionNodeSql
                 argumentNodes[i].Accept(this);
                 _stringBuilder.Append(", ");
             }
-
             
-            //_stringBuilder.Length = _stringBuilder.Length - 2;
-            
-            //TODO: String builder remove is slow!, need to check if we can do something faster
             _stringBuilder.Remove(_stringBuilder.Length - 2, 2);
         }
 

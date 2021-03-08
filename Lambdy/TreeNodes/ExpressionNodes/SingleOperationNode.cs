@@ -9,7 +9,7 @@ namespace Lambdy.TreeNodes.ExpressionNodes
         public ExpressionType Operator { get; set; }
         public ExpressionNode Child { get; set; }
 
-        public override void Accept(VoidExpressionNodeVisitor visitor)
+        public override void Accept(ExpressionNodeVisitor visitor)
         {
             visitor.VisitSingleOperationNode(this);
         }
