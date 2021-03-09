@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Lambdy.Constants;
 
 namespace Lambdy.Resolvers.NameResolvers
 {
@@ -37,6 +38,15 @@ namespace Lambdy.Resolvers.NameResolvers
 
         public static string GetColumnName(MemberExpression member)
         {
+            if (member.Member.Name == CSharpNullable.UnderlyingValueAccessor &&
+                Nullable.GetUnderlyingType(member.Expression.Type) != null)
+            {
+                // Is nullable type and has .Value accessor
+                // need to fetch table name from encasedExpression
+                var encasedExpression = ((MemberExpression) member.Expression);
+                return GetColumnName(encasedExpression.Member);
+            }
+            
             return GetColumnName(member.Member);
         }
 

@@ -14,6 +14,8 @@ namespace Lambdy.Tests.TestModels.Tables
         
         public int Age { get; set; }
         
+        public double? Height { get; set; }
+        
         public DateTime BirthDate { get; set; }
         
         public DateTime? LastVisit { get; set; }
