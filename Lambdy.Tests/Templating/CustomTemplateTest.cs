@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Lambdy.Constants;
 using Lambdy.Tests.TestModels.Tables;
 using Xunit;
 
