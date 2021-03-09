@@ -14,8 +14,9 @@ namespace Lambdy.Compilers.Query
             var expressionNodeSqlVisitor = new RecursiveNodeSqlVisitor(stringBuilder);
             var clauseSectionSqlVisitor = new RecursiveClauseSectionSqlVisitor(
                 expressionNodeSqlVisitor,
-                stringBuilder);
-            
+                stringBuilder,
+                queryCompilerInput.SqlDialect);
+
             clauseSectionSqlVisitor.SetTemplate(queryCompilerInput.SqlTemplate);
             expressionNodeSqlVisitor.SetParameterTracker(queryCompilerInput.ParameterTracker);
 

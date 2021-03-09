@@ -21,12 +21,16 @@ namespace Lambdy.Visitors.ClauseSectionSql.Abstract
             StringBuilder = stringBuilder;
         }
         
-        public abstract void VisitFromClause(FromClauseNode inNode);
+        public abstract void VisitFromClause(FromClauseNode fromNode);
         
-        public abstract void VisitJoinClause(JoinClauseNode inNode);
+        public abstract void VisitJoinClause(JoinClauseNode joinNode);
         
-        public abstract void VisitSelectClause(SelectClauseNode inNode);
+        public abstract void VisitSelectClause(SelectClauseNode selectNode);
         
-        public abstract void VisitWhereClause(WhereClauseNode inNode);
+        public abstract void VisitWhereClause(WhereClauseNode whereNode);
+
+        public abstract void VisitOrderClause(OrderClauseNode orderClauseNode);
+
+        public abstract void VisitSkipTakeClause(SkipTakeClauseNode skipTakeNode);
     }
 }
