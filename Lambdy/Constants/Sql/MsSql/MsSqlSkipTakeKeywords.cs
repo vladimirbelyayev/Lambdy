@@ -1,6 +1,6 @@
 ﻿namespace Lambdy.Constants.Sql.MsSql
 {
-    public static class MsSqlSkipTakeKeywords
+    internal static class MsSqlSkipTakeKeywords
     {
         public static string Offset = "OFFSET";
         public static string Rows = "ROWS";

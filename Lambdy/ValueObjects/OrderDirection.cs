@@ -1,6 +1,6 @@
 ﻿namespace Lambdy.ValueObjects
 {
-    public enum OrderDirection
+    internal enum OrderDirection
     {
         Asc,
         Desc
