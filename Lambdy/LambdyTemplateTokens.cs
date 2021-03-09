@@ -1,4 +1,4 @@
-﻿namespace Lambdy.Constants
+﻿namespace Lambdy
 {
     public static class LambdyTemplateTokens
     {
