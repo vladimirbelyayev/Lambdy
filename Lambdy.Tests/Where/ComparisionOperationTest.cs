@@ -172,5 +172,42 @@ namespace Lambdy.Tests.Where
                 .Should()
                 .Contain(expectedResult);
         }
+        
+        [Fact]
+        public void NullShouldCreateIsNull()
+        {
+            var expectedResult = $"Table.{nameof(Person.PersonAddressId)} IS NULL";
+
+            var sqlResult = LambdyQuery
+                .ByModel(new
+                {
+                    Table = (Person) null
+                })
+                .Where(x => x.Table.PersonAddressId == null)
+                .Compile();
+
+            sqlResult.Sql
+                .Should()
+                .Contain(expectedResult);
+        }
+        
+        [Fact]
+        public void NotNullShouldCreateIsNotNull()
+        {
+            var expectedResult = $"Table.{nameof(Person.PersonAddressId)} IS NOT NULL";
+
+            var sqlResult = LambdyQuery
+                .ByModel(new
+                {
+                    Table = (Person) null
+                })
+                .Where(x => x.Table.PersonAddressId != null)
+                .Compile();
+
+            sqlResult.Sql
+                .Should()
+                .Contain(expectedResult);
+        }
+        
     }
 }

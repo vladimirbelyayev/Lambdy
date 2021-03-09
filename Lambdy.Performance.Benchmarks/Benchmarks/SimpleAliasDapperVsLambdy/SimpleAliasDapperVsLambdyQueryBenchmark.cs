@@ -2,7 +2,6 @@
 using System.Linq;
 using BenchmarkDotNet.Attributes;
 using Dapper;
-using Lambdy.Constants;
 using Lambdy.Performance.Benchmarks.EfCoreContext;
 using Lambdy.Performance.Benchmarks.SqlLite;
 

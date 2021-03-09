@@ -11,13 +11,29 @@ namespace Lambdy.Resolvers.ExpressionResolvers
         {
             var binaryExpression = (BinaryExpression) expression;
 
+            var left = ExpressionResolverMediator
+                .ResolveExpression(binaryExpression.Left);
+            var right = ExpressionResolverMediator
+                .ResolveExpression(binaryExpression.Right);
+
+            if (right is ValueNode valueNode)
+            {
+                var isNullComparision = valueNode.Value == null;
+                if (isNullComparision)
+                {
+                    return new NullOperationNode
+                    {
+                        Left = left,
+                        Operator = binaryExpression.NodeType
+                    };
+                }
+            }
+            
             return new OperationNode
             {
-                Left = ExpressionResolverMediator
-                    .ResolveExpression(binaryExpression.Left),
+                Left = left,
                 Operator = binaryExpression.NodeType,
-                Right = ExpressionResolverMediator
-                    .ResolveExpression(binaryExpression.Right)
+                Right = right
             };
         }
     }

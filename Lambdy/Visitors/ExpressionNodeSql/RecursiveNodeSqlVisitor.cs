@@ -82,6 +82,13 @@ namespace Lambdy.Visitors.ExpressionNodeSql
             operationNode.Right.Accept(this);
         }
 
+        public override void VisitNullOperationNode(NullOperationNode operationNode)
+        {
+            operationNode.Left.Accept(this);
+            _stringBuilder.Append(' ');
+            _stringBuilder.Append(SqlNullOperationMap.Operations[operationNode.Operator]);
+        }
+
         public override void VisitSingleOperationNode(SingleOperationNode singleOperationNode)
         {
             _stringBuilder.Append(SqlOperationMap.Operations[singleOperationNode.Operator]);
