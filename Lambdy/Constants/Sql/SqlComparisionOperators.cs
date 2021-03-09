@@ -10,5 +10,7 @@
         public static readonly string LessThanOrEqual = "<=";
         public static readonly string Like = "LIKE";
         public static readonly string In = "IN";
+        public static readonly string IsNull = "IS NULL";
+        public static readonly string IsNotNull = "IS NOT NULL";
     }
 }

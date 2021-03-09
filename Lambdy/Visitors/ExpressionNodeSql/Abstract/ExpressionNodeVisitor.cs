@@ -8,6 +8,7 @@ namespace Lambdy.Visitors.ExpressionNodeSql.Abstract
         public abstract void VisitLikeNode(LikeNode likeNode);
         public abstract void VisitMemberNode(MemberNode memberNode);
         public abstract void VisitOperationNode(OperationNode operationNode);
+        public abstract void VisitNullOperationNode(NullOperationNode operationNode);
         public abstract void VisitSingleOperationNode(SingleOperationNode singleOperationNode);
         public abstract void VisitValueNode(ValueNode valueNode);
         public abstract void VisitConstructorNode(ConstructorNode constructorNode);
