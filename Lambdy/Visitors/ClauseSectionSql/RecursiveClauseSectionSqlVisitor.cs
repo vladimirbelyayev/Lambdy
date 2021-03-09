@@ -49,9 +49,12 @@ namespace Lambdy.Visitors.ClauseSectionSql
             }
             
             StringBuilder.Clear();
-            StringBuilder.Append(SqlClauses.Select);
-            StringBuilder.Append(' ');
-            
+            if (!Sql.Contains(SqlClauses.Select))
+            {
+                StringBuilder.Append(SqlClauses.Select);
+                StringBuilder.Append(' ');
+            }
+
             selectClauseNode.Node.Accept(_expressionNodeSqlVisitor);
             
             Sql = Sql.Replace(
@@ -70,9 +73,12 @@ namespace Lambdy.Visitors.ClauseSectionSql
             }
 
             StringBuilder.Clear();
-            StringBuilder.Append(SqlClauses.Where);
-            StringBuilder.Append(' ');
-            
+            if (!Sql.Contains(SqlClauses.Where))
+            {
+                StringBuilder.Append(SqlClauses.Where);
+                StringBuilder.Append(' ');
+            }
+
             var nodeLength =  whereClauseNode.Nodes.Count;
             var nodes = whereClauseNode.Nodes;
             
@@ -106,9 +112,12 @@ namespace Lambdy.Visitors.ClauseSectionSql
             }
 
             StringBuilder.Clear();
-            StringBuilder.Append(SqlClauses.OrderBy);
-            StringBuilder.Append(' ');
-            
+            if (!Sql.Contains(SqlClauses.OrderBy))
+            {
+                StringBuilder.Append(SqlClauses.OrderBy);
+                StringBuilder.Append(' ');
+            }
+
             var nodeLength =  orderClauseNode.Nodes.Count;
             var nodes = orderClauseNode.Nodes;
             for (var i = 0; i < nodeLength; i++)
