@@ -5,6 +5,8 @@
         public static readonly string Sql = $"{LambdyTemplateTokens.Select}" +
                                             $"{LambdyTemplateTokens.From}" +
                                             $"{LambdyTemplateTokens.Joins}" +
-                                            $"{LambdyTemplateTokens.Where}";
+                                            $"{LambdyTemplateTokens.Where}" +
+                                            $"{LambdyTemplateTokens.OrderBy}" +
+                                            $"{LambdyTemplateTokens.SkipTake}";
     }
 }

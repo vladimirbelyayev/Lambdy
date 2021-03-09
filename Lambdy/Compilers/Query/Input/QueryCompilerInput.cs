@@ -5,6 +5,8 @@ namespace Lambdy.Compilers.Query.Input
 {
     internal class QueryCompilerInput
     {
+        public LambdySqlDialect SqlDialect { get; set; }
+        
         public string SqlTemplate { get; set; }
 
         public ParameterTracker ParameterTracker { get; set; }

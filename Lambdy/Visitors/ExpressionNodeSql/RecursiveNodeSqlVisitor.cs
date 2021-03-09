@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
+﻿using System.Text;
 using Lambdy.Constants.Sql;
+using Lambdy.Maps;
 using Lambdy.Parameters;
 using Lambdy.TreeNodes.ExpressionNodes;
 using Lambdy.ValueObjects;
@@ -11,22 +10,6 @@ namespace Lambdy.Visitors.ExpressionNodeSql
 {
     internal class RecursiveNodeSqlVisitor : ExpressionNodeVisitor
     {
-        private static readonly IReadOnlyDictionary<ExpressionType, string> OperationDictionary =
-            new Dictionary<ExpressionType, string>()
-            {
-                {ExpressionType.Equal, SqlComparisionOperators.Equal},
-                {ExpressionType.NotEqual, SqlComparisionOperators.NotEqual},
-                {ExpressionType.GreaterThan, SqlComparisionOperators.GreaterThan},
-                {ExpressionType.LessThan, SqlComparisionOperators.LessThan},
-                {ExpressionType.GreaterThanOrEqual, SqlComparisionOperators.GreaterThanOrEqual},
-                {ExpressionType.LessThanOrEqual, SqlComparisionOperators.LessThanOrEqual},
-                {ExpressionType.AndAlso, SqlBooleanLogicalOperators.And},
-                {ExpressionType.OrElse, SqlBooleanLogicalOperators.Or},
-                {ExpressionType.Not, SqlBooleanLogicalOperators.Not},
-                {ExpressionType.Convert, string.Empty} //We do not do conversion operations, just pass value!
-            };
-        
-        // ReSharper disable once NotAccessedField.Local This will be used later on
         private readonly StringBuilder _stringBuilder;
 
         public RecursiveNodeSqlVisitor(StringBuilder stringBuilder)
@@ -94,14 +77,14 @@ namespace Lambdy.Visitors.ExpressionNodeSql
         {
             operationNode.Left.Accept(this);
             _stringBuilder.Append(' ');
-            _stringBuilder.Append(OperationDictionary[operationNode.Operator]);
+            _stringBuilder.Append(SqlOperationMap.Operations[operationNode.Operator]);
             _stringBuilder.Append(' ');
             operationNode.Right.Accept(this);
         }
 
         public override void VisitSingleOperationNode(SingleOperationNode singleOperationNode)
         {
-            _stringBuilder.Append(OperationDictionary[singleOperationNode.Operator]);
+            _stringBuilder.Append(SqlOperationMap.Operations[singleOperationNode.Operator]);
             _stringBuilder.Append(' ');
             singleOperationNode.Child.Accept(this);
         }
