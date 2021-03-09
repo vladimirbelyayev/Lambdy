@@ -82,5 +82,24 @@ namespace Lambdy.Tests.Where
                 .Should()
                 .Contain(expectedResult);
         }
+        
+        [Fact]
+        public void NonNullableToNullableShouldCreateIn()
+        {
+            var expectedResult = $"Table.{nameof(Person.Height)} {SqlComparisionOperators.In} ";
+            var list = new List<double>() {1, 2, 5};
+            
+            var sqlResult = LambdyQuery
+                .ByModel(new
+                {
+                    Table = (Person) null
+                })
+                .Where(x => list.Contains(x.Table.Height.Value))
+                .Compile();
+
+            sqlResult.Sql
+                .Should()
+                .Contain(expectedResult);
+        }
     }
 }
