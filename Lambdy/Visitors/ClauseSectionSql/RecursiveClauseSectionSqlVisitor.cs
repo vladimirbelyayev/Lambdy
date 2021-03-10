@@ -56,6 +56,7 @@ namespace Lambdy.Visitors.ClauseSectionSql
             }
 
             selectClauseNode.Node.Accept(_expressionNodeSqlVisitor);
+            StringBuilder.Append(Environment.NewLine);
             
             Sql = Sql.Replace(
                 LambdyTemplateTokens.Select, 
