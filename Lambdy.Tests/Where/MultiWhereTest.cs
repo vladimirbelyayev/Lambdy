@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Lambdy.Tests.Constants;
 using Lambdy.Tests.TestModels.Tables;
 using Xunit;
 
@@ -9,8 +10,10 @@ namespace Lambdy.Tests.Where
         [Fact]
         public void MultiWhereShouldCreateAndWithBraces()
         {
-            var expectedResult = $"\\(Table.{nameof(Person.Age)} = @p_[0-9]+\\)[\\n\\r\\s]" +
-                                 $"+AND[\\n\\r\\s]+\\(Table.{nameof(Person.Name)} = @p_[0-9]+\\)";
+            var expectedResult = $"\\(Table.{nameof(Person.Age)} = {LambdyRegex.Params}\\)" +
+                                 $"{LambdyRegex.NewLineOrWhitespace}" +
+                                 $"+AND{LambdyRegex.NewLineOrWhitespace}+" +
+                                 $"\\(Table.{nameof(Person.Name)} = {LambdyRegex.Params}\\)";
 
             var sqlResult = LambdyQuery
                 .ByModel(new

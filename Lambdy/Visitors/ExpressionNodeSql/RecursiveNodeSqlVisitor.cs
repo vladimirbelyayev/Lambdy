@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq.Expressions;
+using System.Text;
 using Lambdy.Constants.Sql;
 using Lambdy.Maps;
 using Lambdy.Parameters;
@@ -75,11 +76,21 @@ namespace Lambdy.Visitors.ExpressionNodeSql
 
         public override void VisitOperationNode(OperationNode operationNode)
         {
+            var brace = operationNode.Operator == ExpressionType.OrElse;
+
+            if (brace)
+            {
+                _stringBuilder.Append('(');
+            }
             operationNode.Left.Accept(this);
             _stringBuilder.Append(' ');
             _stringBuilder.Append(SqlOperationMap.Operations[operationNode.Operator]);
             _stringBuilder.Append(' ');
             operationNode.Right.Accept(this);
+            if (brace)
+            {
+                _stringBuilder.Append(')');
+            }
         }
 
         public override void VisitNullOperationNode(NullOperationNode operationNode)
