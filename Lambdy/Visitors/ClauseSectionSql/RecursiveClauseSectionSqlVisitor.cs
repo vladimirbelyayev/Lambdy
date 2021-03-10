@@ -82,12 +82,19 @@ namespace Lambdy.Visitors.ClauseSectionSql
 
             var nodeLength =  whereClauseNode.Nodes.Count;
             var nodes = whereClauseNode.Nodes;
+            var brace = nodeLength > 1;
             
             for (var i = 0; i < nodeLength; i++)
             {
-                StringBuilder.Append('(');
+                if (brace)
+                {
+                    StringBuilder.Append('(');
+                }
                 nodes[i].Accept(_expressionNodeSqlVisitor);
-                StringBuilder.Append(')');
+                if (brace)
+                {
+                    StringBuilder.Append(')');
+                }
                 StringBuilder.Append(' ');
                 StringBuilder.Append(SqlBooleanLogicalOperators.And);
                 StringBuilder.Append(' ');

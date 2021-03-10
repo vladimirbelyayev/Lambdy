@@ -1,6 +1,6 @@
 ﻿namespace Lambdy.Tests.Constants
 {
-    public static class SqlComparisionOperators
+    internal static class SqlComparisionOperators
     {
         public static readonly string Equal = "=";
         public static readonly string NotEqual = "!=";

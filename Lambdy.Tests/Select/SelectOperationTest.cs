@@ -11,8 +11,8 @@ namespace Lambdy.Tests.Select
         [Fact]
         public void SelectShouldBeCreated()
         {
-            var expectedResult = $"{SqlClauses.Select} Table.Name AS AliasName,[\\n\\r\\s]" +
-                                 "Table.Surname AS AliasSurname,[\\n\\r\\s]" +
+            var expectedResult = $"{SqlClauses.Select} Table.Name AS AliasName,{LambdyRegex.NewLineOrWhitespace}" +
+                                 $"Table.Surname AS AliasSurname,{LambdyRegex.NewLineOrWhitespace}" +
                                  "Table2.AddressLine2 AS AddressLine";
             
             var sqlResult = LambdyQuery
