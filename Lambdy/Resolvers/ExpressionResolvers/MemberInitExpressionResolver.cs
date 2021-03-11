@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Lambdy.Resolvers.ExpressionResolvers.Abstract;
 using Lambdy.Resolvers.NameResolvers;
 using Lambdy.TreeNodes.ExpressionNodes;
