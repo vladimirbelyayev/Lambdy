@@ -4,14 +4,9 @@ namespace Lambdy.Parameters
 {
     internal class ParameterTracker
     {
-        public Dictionary<string, object> Parameters { get; private set; } = new Dictionary<string, object>();
+        public Dictionary<string, object> Parameters { get; } = new Dictionary<string, object>();
 
         private int _paramIndex;
-
-        public void AddParameter(string name, object value)
-        {
-            Parameters.Add(name, value);
-        }
 
         public string AddParameter(object value)
         {
@@ -20,7 +15,7 @@ namespace Lambdy.Parameters
             return param;
         }
 
-        public string GetNextParameterName()
+        private string GetNextParameterName()
         {
             return  $"@p{_paramIndex++}";
         }

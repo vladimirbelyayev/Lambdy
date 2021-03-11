@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using System.Linq.Expressions;
+using Lambdy.Maps;
 using Lambdy.Resolvers.ExpressionResolvers.Abstract;
 using Lambdy.Resolvers.ExpressionResolvers.SubResolvers.MethodCall;
 using Lambdy.TreeNodes.ExpressionNodes.Abstract;
-using Lambdy.ValueObjects;
 
 namespace Lambdy.Resolvers.ExpressionResolvers
 {
@@ -20,7 +19,7 @@ namespace Lambdy.Resolvers.ExpressionResolvers
             var methodCallExpression = (MethodCallExpression) expression;
             
             if (methodCallExpression.Method.DeclaringType == typeof(string) && 
-                Enum.TryParse(methodCallExpression.Method.Name, true, out LikeMethod _))
+                LikeOperationMethodMap.OperationMethods.ContainsKey(methodCallExpression.Method.Name))
             {
                 return _likeResolver.ResolveExpression(methodCallExpression);
             } 

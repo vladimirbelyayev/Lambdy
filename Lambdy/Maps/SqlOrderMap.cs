@@ -4,7 +4,7 @@ using Lambdy.ValueObjects;
 
 namespace Lambdy.Maps
 {
-    internal class SqlOrderMap
+    internal static class SqlOrderMap
     {
         public static readonly IReadOnlyDictionary<OrderDirection, string> Orders =
             new Dictionary<OrderDirection, string>()

@@ -29,12 +29,10 @@ namespace Lambdy.Resolvers
 
         private static readonly MemberInitExpressionResolver
             MemberInitExpressionResolver = new MemberInitExpressionResolver();
-        
 
         private static readonly IDictionary<ExpressionType, ExpressionResolver> Resolvers = 
             new Dictionary<ExpressionType, ExpressionResolver>
         {
-            // Query expressions
             { ExpressionType.Equal, BinaryExpressionResolver },
             { ExpressionType.NotEqual, BinaryExpressionResolver },
             { ExpressionType.LessThan, BinaryExpressionResolver },

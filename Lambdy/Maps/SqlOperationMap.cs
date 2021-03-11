@@ -18,7 +18,7 @@ namespace Lambdy.Maps
                 {ExpressionType.AndAlso, SqlBooleanLogicalOperators.And},
                 {ExpressionType.OrElse, SqlBooleanLogicalOperators.Or},
                 {ExpressionType.Not, SqlBooleanLogicalOperators.Not},
-                {ExpressionType.Convert, string.Empty} //We do not do conversion operations, just pass value!
+                {ExpressionType.Convert, string.Empty}
             };
     }
 }

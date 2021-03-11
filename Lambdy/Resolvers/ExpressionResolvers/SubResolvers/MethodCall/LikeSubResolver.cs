@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Lambdy.Maps;
 using Lambdy.Resolvers.NameResolvers;
 using Lambdy.TreeNodes.ExpressionNodes;
 using Lambdy.TreeNodes.ExpressionNodes.Abstract;
-using Lambdy.ValueObjects;
 
 namespace Lambdy.Resolvers.ExpressionResolvers.SubResolvers.MethodCall
 {
@@ -14,8 +13,6 @@ namespace Lambdy.Resolvers.ExpressionResolvers.SubResolvers.MethodCall
             var member = (MemberExpression) callExpression.Object;
             var fieldValue = ExpressionValueResolverMediator.GetValue(callExpression.Arguments[0]);
             
-            var callFunction = (LikeMethod) Enum.Parse(typeof(LikeMethod), callExpression.Method.Name, true);
-                
             return new LikeNode
             {
                 MemberNode = new MemberNode
@@ -23,7 +20,7 @@ namespace Lambdy.Resolvers.ExpressionResolvers.SubResolvers.MethodCall
                     TableName = TableNameResolver.GetTableName(member),
                     FieldName = ColumnNameResolver.GetColumnName(callExpression.Object)
                 },
-                Method = callFunction,
+                Method = LikeOperationMethodMap.OperationMethods[callExpression.Method.Name],
                 Value = new ValueNode()
                 {
                     Value = fieldValue

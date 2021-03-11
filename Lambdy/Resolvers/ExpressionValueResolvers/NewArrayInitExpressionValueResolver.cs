@@ -8,12 +8,12 @@ namespace Lambdy.Resolvers.ExpressionValueResolvers
         public override object GetValue(Expression expression)
         {
             var newArrayExpression = (NewArrayExpression) expression;
-                    
-            var array = new object[newArrayExpression.Expressions.Count];
-            var i = 0;
-            foreach (var arrItemExpression in newArrayExpression.Expressions)
+
+            var arrayValueLength = newArrayExpression.Expressions.Count;
+            var array = new object[arrayValueLength];
+            for (var i = 0; i < arrayValueLength; i++)
             {
-                array[i++] = ExpressionValueResolverMediator.GetValue(arrItemExpression);
+                array[i] = ExpressionValueResolverMediator.GetValue(newArrayExpression.Expressions[i]);
             }
 
             return array;
