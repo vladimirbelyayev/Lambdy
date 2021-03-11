@@ -1,6 +1,6 @@
 ﻿namespace Lambdy.Constants
 {
-    public static class CSharpNullable
+    internal static class CSharpNullable
     {
         public static string UnderlyingValueAccessor = "Value";
     }
