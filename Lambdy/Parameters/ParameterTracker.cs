@@ -22,7 +22,7 @@ namespace Lambdy.Parameters
 
         public string GetNextParameterName()
         {
-            return  $"@p_{_paramIndex++}";
+            return  $"@p{_paramIndex++}";
         }
     }
 }
