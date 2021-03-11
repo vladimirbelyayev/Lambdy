@@ -32,7 +32,7 @@ var extendableParamDictionary = lambdyResult.Parameters;
 ```
 
 ```c#
-// With anyonymous type
+// With anonymous type
 
 var joins = $"FROM {nameof(Person)} Table1 " +
             $"JOIN {nameof(Address)} Table2 ON Table2.Id = Table1.AddressId ";
