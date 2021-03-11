@@ -44,7 +44,7 @@ var lambdyResult = LambdyQuery
 	})
 	.WithTemplate($"{LambdyTemplateTokens.Select}" +
             $"{joins}" +
-            $"{LambdyTemplateTokens.Where} AND Table1.Field2 != @AdditionalFilterParam" +
+            $"{LambdyTemplateTokens.Where} AND Table1.Field2 != @AdditionalFilterParam " +
             $"{LambdyTemplateTokens.OrderBy}" +
             $"{LambdyTemplateTokens.SkipTake}")
 	.Where(x => x.Table1.Id == 1)
