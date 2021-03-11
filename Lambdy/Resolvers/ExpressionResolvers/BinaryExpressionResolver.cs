@@ -16,17 +16,13 @@ namespace Lambdy.Resolvers.ExpressionResolvers
             var right = ExpressionResolverMediator
                 .ResolveExpression(binaryExpression.Right);
 
-            if (right is ValueNode valueNode)
+            if (right is ValueNode valueNode && valueNode.Value == null)
             {
-                var isNullComparision = valueNode.Value == null;
-                if (isNullComparision)
+                return new NullOperationNode
                 {
-                    return new NullOperationNode
-                    {
-                        Left = left,
-                        Operator = binaryExpression.NodeType
-                    };
-                }
+                    Left = left,
+                    Operator = binaryExpression.NodeType
+                };
             }
             
             return new OperationNode

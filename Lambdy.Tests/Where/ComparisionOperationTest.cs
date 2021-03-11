@@ -209,5 +209,29 @@ namespace Lambdy.Tests.Where
                 .Contain(expectedResult);
         }
         
+        [Fact]
+        public void NullableValuesShouldBeComparedCorrectly()
+        {
+            var expectedResult = $"{SqlClauses.Where} Table.{nameof(Person.Value)} = {LambdyRegex.Params}";
+
+            var parameters = new
+            {
+                Value = (double?) 2
+            };
+            
+            var sqlResult = LambdyQuery
+                .ByModel(new
+                {
+                    Table = (Person) null
+                })
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
+                .Where(x => x.Table.Value.Value == parameters.Value.Value)
+                .Compile();
+
+            sqlResult.Sql
+                .Should()
+                .MatchRegex(expectedResult);
+        }
+        
     }
 }

@@ -10,6 +10,7 @@ namespace Lambdy.Resolvers.ExpressionValueResolvers
         public override object GetValue(Expression expression)
         {
             var memberExpr = (MemberExpression) expression;
+
             if (memberExpr.Expression == null)
             {
                 return ResolveValue(memberExpr.Member, null);

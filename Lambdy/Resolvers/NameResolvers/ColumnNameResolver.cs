@@ -19,21 +19,11 @@ namespace Lambdy.Resolvers.NameResolvers
 
             throw new ArgumentException("Member expression expected");
         }
-        
-        public static string GetColumnName<T>(Expression<Func<T, object>> selector)
-        {
-            return GetColumnName(GetMemberExpression(selector.Body));
-        }
 
         public static string GetColumnName(Expression expression)
         {
             var member = GetMemberExpression(expression);
             return GetColumnName(member);
-        }
-
-        public static string GetColumnName(MemberAssignment expression)
-        {
-            return GetColumnName(expression.Member);
         }
 
         public static string GetColumnName(MemberExpression member)
