@@ -12,12 +12,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      # Now run whatever you want:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.x
       - name: Pack
         run: dotnet pack --configuration Release
-      #- name: NuGet push
-      #  run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_PACKAGE_PAT }} --source nuget.org --skip-duplicate
+      - name: NuGet push
+        run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_PACKAGE_PAT }} --source nuget.org --skip-duplicate
