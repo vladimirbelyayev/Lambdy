@@ -5,6 +5,7 @@ on:
 jobs:
   deploy:
     name: Publish nuget
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Clone Repository (Latest)
