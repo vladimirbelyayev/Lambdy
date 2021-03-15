@@ -82,5 +82,4 @@ var lambdyResult = LambdyQuery
   
 var parameterizedSql = lambdyResult.Sql;
 var extendableParamDictionary = lambdyResult.Parameters;
-extendableParamDictionary.Add("@AdditionalFilterParam", customValue);
 ```
