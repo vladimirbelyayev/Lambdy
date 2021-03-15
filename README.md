@@ -83,3 +83,29 @@ var lambdyResult = LambdyQuery
 var parameterizedSql = lambdyResult.Sql;
 var extendableParamDictionary = lambdyResult.Parameters;
 ```
+
+```c#
+// Switch between using expressions and raw SQL
+            
+var lambdyResult = LambdyQuery
+	.ByModel(new { 
+            Table1 = (Person) null, 
+            Table2 = (Address) null 
+	})
+	.Raw.From($"FROM {nameof(Person)} Table1")
+	.Raw.Join($"JOIN {nameof(Address)} Table2 ON Table2.Id = Table1.AddressId")
+	.Where(x => x.Table1.Id == 1)
+	.Raw.Where("Table1.Id == @MyParam", new { MyParam = 1 })
+	.Raw.OrderBy("ORDER BY CASE " + 
+	"WHEN Table1.Col1 < @OrderParam THEN 1 " + 
+	"ELSE 0 END", new { OrderParam = 5 })
+	.ThenBy(x => x.Table1.Col2)
+	.Skip(0)
+	.Take(10)
+	.Select(x => new { AliasCol = x.Table1.Id })
+	.Compile();
+  
+  
+var parameterizedSql = lambdyResult.Sql;
+var extendableParamDictionary = lambdyResult.Parameters;
+```
