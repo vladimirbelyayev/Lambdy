@@ -18,9 +18,9 @@ namespace Lambdy
         
         private readonly QueryCompiler _queryCompiler;
         
-        private readonly ParameterTracker _parameterTracker = new ParameterTracker();
-
         private LambdySqlDialect _sqlDialect = LambdySqlDialect.MsSql;
+        
+        private readonly ParameterTracker _parameterTracker = new ParameterTracker();
 
         private readonly ClauseSectionNode[] _clauseSectionNodes = new ClauseSectionNode[6];
         private readonly SelectClauseNode _selectClause = new SelectClauseNode();
@@ -31,7 +31,7 @@ namespace Lambdy
         private readonly SkipTakeClauseNode _skipTakeClause = new SkipTakeClauseNode();
         
         public RawBuilder<TModel> Raw { get; }
-        
+
         internal LambdyBuilder(QueryCompiler queryCompiler)
         {
             _queryCompiler = queryCompiler;
@@ -43,6 +43,7 @@ namespace Lambdy
             _clauseSectionNodes[5] = _skipTakeClause;
 
             Raw = new RawBuilder<TModel>(this,
+                _parameterTracker,
                 new RawBuilderClauseReferences
                 {
                     SelectClause = _selectClause,

@@ -9,6 +9,7 @@ namespace Lambdy.Maps
         public static readonly IReadOnlyDictionary<OrderDirection, string> Orders =
             new Dictionary<OrderDirection, string>()
             {
+                {OrderDirection.Undefined, string.Empty},
                 {OrderDirection.Asc, SqlOrderKeywords.Asc},
                 {OrderDirection.Desc, SqlOrderKeywords.Desc}
             };

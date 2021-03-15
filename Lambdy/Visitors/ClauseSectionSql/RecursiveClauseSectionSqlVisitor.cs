@@ -51,7 +51,7 @@ namespace Lambdy.Visitors.ClauseSectionSql
 
         public override void VisitJoinClause(JoinClauseNode joinClauseNode)
         {
-            if (joinClauseNode?.Nodes == null || joinClauseNode?.Nodes.Count == 0)
+            if (joinClauseNode?.Nodes == null || joinClauseNode.Nodes.Count == 0)
             {
                 Sql = Sql.Replace(
                     LambdyTemplateTokens.Joins, 
