@@ -6,7 +6,7 @@ namespace Lambdy.Visitors.ClauseSectionSql.Abstract
 {
     internal abstract class ClauseSectionNodeVisitor
     {
-        public string Sql { get; set; }
+        public string Sql { get; protected set; }
         
         protected readonly StringBuilder StringBuilder;
         
@@ -16,7 +16,7 @@ namespace Lambdy.Visitors.ClauseSectionSql.Abstract
             Sql = sqlTemplate ?? DefaultSqlTemplate.Sql;
         }
 
-        public ClauseSectionNodeVisitor(StringBuilder stringBuilder)
+        protected ClauseSectionNodeVisitor(StringBuilder stringBuilder)
         {
             StringBuilder = stringBuilder;
         }

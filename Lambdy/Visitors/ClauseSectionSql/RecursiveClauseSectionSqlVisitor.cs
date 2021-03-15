@@ -24,18 +24,54 @@ namespace Lambdy.Visitors.ClauseSectionSql
             _skipTakeStrategy = SqlDialectStrategyFactory.CreateSkipTakeStrategy(sqlDialect, stringBuilder);
         }
         
-        public override void VisitFromClause(FromClauseNode inNode)
+        public override void VisitFromClause(FromClauseNode fromClauseNode)
         {
+            if (fromClauseNode?.Node == null)
+            {
+                Sql = Sql.Replace(
+                    LambdyTemplateTokens.From, 
+                    string.Empty);
+                return;
+            }
+            
+            StringBuilder.Clear();
+            if (!Sql.Contains(SqlClauses.From))
+            {
+                StringBuilder.Append(SqlClauses.From);
+                StringBuilder.Append(' ');
+            }
+
+            fromClauseNode.Node.Accept(_expressionNodeSqlVisitor);
+            StringBuilder.Append(Environment.NewLine);
+
             Sql = Sql.Replace(
                 LambdyTemplateTokens.From, 
-                string.Empty);
+                StringBuilder.ToString());
         }
 
-        public override void VisitJoinClause(JoinClauseNode inNode)
+        public override void VisitJoinClause(JoinClauseNode joinClauseNode)
         {
+            if (joinClauseNode?.Nodes == null || joinClauseNode?.Nodes.Count == 0)
+            {
+                Sql = Sql.Replace(
+                    LambdyTemplateTokens.Joins, 
+                    string.Empty);
+                return;
+            }
+            
+            StringBuilder.Clear();
+
+            var nodeLength =  joinClauseNode.Nodes.Count;
+            var nodes = joinClauseNode.Nodes;
+            for (var i = 0; i < nodeLength; i++)
+            {
+                nodes[i].Accept(_expressionNodeSqlVisitor);
+                StringBuilder.Append(Environment.NewLine);
+            }
+            
             Sql = Sql.Replace(
                 LambdyTemplateTokens.Joins, 
-                string.Empty);
+                StringBuilder.ToString());
         }
 
         public override void VisitSelectClause(SelectClauseNode selectClauseNode)

@@ -16,5 +16,7 @@ namespace Lambdy.Visitors.ExpressionNodeSql.Abstract
         public abstract void VisitConstructorArgumentNode(ConstructorArgumentNode constructorNode);
         
         public abstract void VisitConstructorMemberNode(ConstructorMemberNode constructorNode);
+
+        public abstract void VisitRawNode(RawNode rawNode);
     }
 }

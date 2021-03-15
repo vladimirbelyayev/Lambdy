@@ -139,5 +139,10 @@ namespace Lambdy.Visitors.ExpressionNodeSql
         {
             _stringBuilder.Append(constructorMemberNode.FieldName);
         }
+
+        public override void VisitRawNode(RawNode rawNode)
+        {
+            _stringBuilder.Append(rawNode.Sql);
+        }
     }
 }

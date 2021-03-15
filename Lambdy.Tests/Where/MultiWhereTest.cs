@@ -12,7 +12,7 @@ namespace Lambdy.Tests.Where
         {
             var expectedResult = $"\\(Table.{nameof(Person.Age)} = {LambdyRegex.Params}\\)" +
                                  $"{LambdyRegex.NewLineOrWhitespace}" +
-                                 $"+AND{LambdyRegex.NewLineOrWhitespace}+" +
+                                 $"AND{LambdyRegex.NewLineOrWhitespace}" +
                                  $"\\(Table.{nameof(Person.Name)} = {LambdyRegex.Params}\\)";
 
             var sqlResult = LambdyQuery
