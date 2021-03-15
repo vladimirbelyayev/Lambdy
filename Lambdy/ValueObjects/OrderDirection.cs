@@ -2,6 +2,7 @@
 {
     internal enum OrderDirection
     {
+        Undefined,
         Asc,
         Desc
     }

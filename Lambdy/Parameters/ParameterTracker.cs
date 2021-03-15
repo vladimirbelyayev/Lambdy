@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lambdy.Parameters
 {
@@ -8,6 +9,20 @@ namespace Lambdy.Parameters
 
         private int _paramIndex;
 
+        private static string _paramPrefix = "@";
+
+        public void AddParameter(
+            string key,
+            object value)
+        {
+            if (key.IndexOf(_paramPrefix, StringComparison.Ordinal) < 0)
+            {
+                key = $"{_paramPrefix}{key}";
+            }
+            
+            Parameters.Add(key, value);
+        }
+        
         public string AddParameter(object value)
         {
             var param = GetNextParameterName();
@@ -17,7 +32,7 @@ namespace Lambdy.Parameters
 
         private string GetNextParameterName()
         {
-            return  $"@p{_paramIndex++}";
+            return  $"{_paramPrefix}p{_paramIndex++}";
         }
     }
 }
