@@ -5,6 +5,7 @@ using Lambdy.Compilers.Query.Abstract;
 using Lambdy.Compilers.Query.Input;
 using Lambdy.Parameters;
 using Lambdy.Resolvers;
+using Lambdy.SubBuilders.Raw;
 using Lambdy.TreeNodes.ClauseSectionNodes;
 using Lambdy.TreeNodes.ClauseSectionNodes.Abstract;
 using Lambdy.ValueObjects;
@@ -29,6 +30,8 @@ namespace Lambdy
         private readonly OrderClauseNode _orderClause = new OrderClauseNode();
         private readonly SkipTakeClauseNode _skipTakeClause = new SkipTakeClauseNode();
         
+        public RawBuilder<TModel> Raw { get; }
+        
         internal LambdyBuilder(QueryCompiler queryCompiler)
         {
             _queryCompiler = queryCompiler;
@@ -38,6 +41,17 @@ namespace Lambdy
             _clauseSectionNodes[3] = _whereClause;
             _clauseSectionNodes[4] = _orderClause;
             _clauseSectionNodes[5] = _skipTakeClause;
+
+            Raw = new RawBuilder<TModel>(this,
+                new RawBuilderClauseReferences
+                {
+                    SelectClause = _selectClause,
+                    FromClause = _fromClause,
+                    JoinClause = _joinClause,
+                    WhereClause = _whereClause,
+                    OrderClause = _orderClause,
+                    SkipTakeClause = _skipTakeClause
+                });
         }
         
         public LambdyBuilder<TModel> WithTemplate(string sqlTemplate)
