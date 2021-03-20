@@ -14,23 +14,30 @@ namespace Lambdy.Visitors.ClauseSectionSql
     {
         private readonly RecursiveNodeSqlVisitor _expressionNodeSqlVisitor;
         private readonly ISkipTakeStrategy _skipTakeStrategy;
+        private readonly bool _removeEmptyTokens;
 
         public RecursiveClauseSectionSqlVisitor(
             RecursiveNodeSqlVisitor expressionNodeSqlVisitor,
             StringBuilder stringBuilder,
-            LambdySqlDialect sqlDialect) : base(stringBuilder)
+            LambdySqlDialect sqlDialect,
+            bool removeEmptyTokens) : base(stringBuilder)
         {
             _expressionNodeSqlVisitor = expressionNodeSqlVisitor;
             _skipTakeStrategy = SqlDialectStrategyFactory.CreateSkipTakeStrategy(sqlDialect, stringBuilder);
+            _removeEmptyTokens = removeEmptyTokens;
         }
         
         public override void VisitFromClause(FromClauseNode fromClauseNode)
         {
             if (fromClauseNode?.Node == null)
             {
-                Sql = Sql.Replace(
-                    LambdyTemplateTokens.From, 
-                    string.Empty);
+                if (_removeEmptyTokens)
+                {
+                    Sql = Sql.Replace(
+                        LambdyTemplateTokens.From, 
+                        string.Empty);
+                }
+
                 return;
             }
             
@@ -53,9 +60,13 @@ namespace Lambdy.Visitors.ClauseSectionSql
         {
             if (joinClauseNode?.Nodes == null || joinClauseNode.Nodes.Count == 0)
             {
-                Sql = Sql.Replace(
-                    LambdyTemplateTokens.Joins, 
-                    string.Empty);
+                if (_removeEmptyTokens)
+                {
+                    Sql = Sql.Replace(
+                        LambdyTemplateTokens.Joins, 
+                        string.Empty);
+                }
+
                 return;
             }
             
@@ -78,9 +89,13 @@ namespace Lambdy.Visitors.ClauseSectionSql
         {
             if (selectClauseNode?.Node == null)
             {
-                Sql = Sql.Replace(
-                    LambdyTemplateTokens.Select, 
-                    string.Empty);
+                if (_removeEmptyTokens)
+                {
+                    Sql = Sql.Replace(
+                        LambdyTemplateTokens.Select, 
+                        string.Empty);
+                }
+
                 return;
             }
             
@@ -103,9 +118,13 @@ namespace Lambdy.Visitors.ClauseSectionSql
         {
             if (whereClauseNode == null || whereClauseNode.Nodes.Count == 0)
             {
-                Sql = Sql.Replace(
-                    LambdyTemplateTokens.Where,
-                    string.Empty);
+                if (_removeEmptyTokens)
+                {
+                    Sql = Sql.Replace(
+                        LambdyTemplateTokens.Where,
+                        string.Empty);
+                }
+
                 return;
             }
 
@@ -149,9 +168,13 @@ namespace Lambdy.Visitors.ClauseSectionSql
         {
             if (orderClauseNode == null || orderClauseNode.Nodes.Count == 0)
             {
-                Sql = Sql.Replace(
-                    LambdyTemplateTokens.OrderBy,
-                    string.Empty);
+                if (_removeEmptyTokens)
+                {
+                    Sql = Sql.Replace(
+                        LambdyTemplateTokens.OrderBy,
+                        string.Empty);
+                }
+
                 return;
             }
 
@@ -184,9 +207,13 @@ namespace Lambdy.Visitors.ClauseSectionSql
         {
             if (skipTakeNode == null || (skipTakeNode.Skip == 0 && skipTakeNode.Take == 0))
             {
-                Sql = Sql.Replace(
-                    LambdyTemplateTokens.SkipTake, 
-                    string.Empty);
+                if (_removeEmptyTokens)
+                {
+                    Sql = Sql.Replace(
+                        LambdyTemplateTokens.SkipTake, 
+                        string.Empty);
+                }
+
                 return;
             }
             

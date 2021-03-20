@@ -13,5 +13,7 @@ namespace Lambdy.Compilers.Query.Input
         
         public ClauseSectionNode[] ClauseNodes { get; set; }
         
+        public bool RemoveEmptyTokens { get; set; }
+        
     }
 }
