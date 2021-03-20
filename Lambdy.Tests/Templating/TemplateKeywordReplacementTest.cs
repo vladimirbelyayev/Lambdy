@@ -68,5 +68,32 @@ namespace Lambdy.Tests.Templating
                 .Should()
                 .NotContain(unexpectedResult);
         }
+
+        [Fact]
+        public void KeywordsShouldNotBeReplacedIfReplaceFalseIsProvidedToCompiler()
+        {
+            var expectedToken1 = LambdyTemplateTokens.Select;
+            var expectedToken2 = LambdyTemplateTokens.Where;
+            var expectedToken3 = LambdyTemplateTokens.SkipTake;
+            
+            var sqlResult = LambdyQuery
+                .ByModel(new
+                {
+                    Table = (Person) null
+                })
+                .OrderBy(x => x.Table.Age)
+                .Compile(new LambdyCompilerOptions()
+                {
+                    RemoveEmptyTokens = false
+                });
+
+            sqlResult.Sql
+                .Should()
+                .Contain(expectedToken1)
+                .And
+                .Contain(expectedToken2)
+                .And
+                .Contain(expectedToken3);
+        }
     }
 }
