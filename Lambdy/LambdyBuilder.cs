@@ -152,7 +152,20 @@ namespace Lambdy
                 SqlDialect = _sqlDialect,
                 SqlTemplate = _customTemplate,
                 ParameterTracker = _parameterTracker,
-                ClauseNodes = _clauseSectionNodes
+                ClauseNodes = _clauseSectionNodes,
+                RemoveEmptyTokens = true
+            });
+        }
+        
+        public LambdyResult Compile(LambdyCompilerOptions options)
+        {
+            return _queryCompiler.Compile(new QueryCompilerInput()
+            {
+                SqlDialect = _sqlDialect,
+                SqlTemplate = _customTemplate,
+                ParameterTracker = _parameterTracker,
+                ClauseNodes = _clauseSectionNodes,
+                RemoveEmptyTokens = options.RemoveEmptyTokens
             });
         }
         
