@@ -9,7 +9,7 @@ using Lambdy.TreeNodes.ExpressionNodes;
 
 namespace Lambdy.Builders.SubBuilders.Raw
 {
-    public class RawBuilder<TModel> : IRawBuilder<TModel>
+    internal class RawBuilder<TModel> : IRawBuilder<TModel>
         where TModel: class
     {
         private readonly ILambdyBuilder<TModel> _parentBuilder;
