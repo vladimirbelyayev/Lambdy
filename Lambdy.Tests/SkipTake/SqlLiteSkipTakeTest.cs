@@ -16,7 +16,7 @@ namespace Lambdy.Tests.SkipTake
                 {
                     TableOne = (Person) null,
                     T = (Address) null,
-                    Table3 = (TableC) null,
+                    Table3 = (Customer) null,
                 })
                 .Skip(10)
                 .Take(50)

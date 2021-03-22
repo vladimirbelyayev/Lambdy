@@ -18,7 +18,7 @@ namespace Lambdy.Tests.Alias
                 {
                     TableOne = (Person) null,
                     T = (Address) null,
-                    Table3 = (TableC) null,
+                    Table3 = (Customer) null,
                 })
                 .Where(x => x.T.Id == Guid.Empty)
                 .Compile();

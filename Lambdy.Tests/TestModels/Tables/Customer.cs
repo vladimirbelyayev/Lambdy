@@ -2,7 +2,7 @@
 
 namespace Lambdy.Tests.TestModels.Tables
 {
-    public class TableC
+    public class Customer
     {
         public Guid Id { get; set; }
         
