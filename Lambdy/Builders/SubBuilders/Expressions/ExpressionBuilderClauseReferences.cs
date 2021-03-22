@@ -1,9 +1,8 @@
 ﻿using Lambdy.TreeNodes.ClauseSectionNodes;
-// ReSharper disable UnusedAutoPropertyAccessor.Global
 
-namespace Lambdy.SubBuilders.Raw
+namespace Lambdy.Builders.SubBuilders.Expressions
 {
-    internal class RawBuilderClauseReferences
+    internal class ExpressionBuilderClauseReferences
     {
         public SelectClauseNode SelectClause { get; set; }
         public FromClauseNode FromClause { get; set; }

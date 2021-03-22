@@ -1,13 +1,11 @@
 ﻿using Lambdy.Tests.TestModels.Tables;
 
-namespace Lambdy.Tests.Alias.Models
+namespace Lambdy.Tests.Casting.Models
 {
-    public class SimpleSelectAlias
+    public class TwoTableJoin
     {
         public Person PersonAlias { get; set; }
         
         public Address AddressAlias { get; set; }
-        
-        public Customer Customer { get; set; }
     }
 }

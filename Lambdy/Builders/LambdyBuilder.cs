@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using Lambdy.Builders.SubBuilders.Expressions;
+using Lambdy.Builders.SubBuilders.Expressions.Interfaces;
+using Lambdy.Builders.SubBuilders.Raw;
+using Lambdy.Builders.SubBuilders.Raw.Interfaces;
 using Lambdy.Compilers.Query.Abstract;
 using Lambdy.Compilers.Query.Input;
 using Lambdy.Parameters;
-using Lambdy.Resolvers;
-using Lambdy.SubBuilders.Raw;
 using Lambdy.TreeNodes.ClauseSectionNodes;
 using Lambdy.TreeNodes.ClauseSectionNodes.Abstract;
-using Lambdy.ValueObjects;
 
-namespace Lambdy
+namespace Lambdy.Builders
 {
-    public sealed class LambdyBuilder<TModel> where TModel: class
+    internal sealed class LambdyBuilder<TModel> : ILambdyBuilder<TModel> 
+        where TModel: class
     {
         private string _customTemplate;
         
@@ -30,7 +29,9 @@ namespace Lambdy
         private readonly OrderClauseNode _orderClause = new OrderClauseNode();
         private readonly SkipTakeClauseNode _skipTakeClause = new SkipTakeClauseNode();
         
-        public RawBuilder<TModel> Raw { get; }
+        public IRawBuilder<TModel> Raw { get; }
+        
+        public IExpressionBuilder ExpressionBuilder { get; }
 
         internal LambdyBuilder(QueryCompiler queryCompiler)
         {
@@ -53,98 +54,43 @@ namespace Lambdy
                     OrderClause = _orderClause,
                     SkipTakeClause = _skipTakeClause
                 });
+
+            ExpressionBuilder = new ExpressionBuilder(
+                new ExpressionBuilderClauseReferences
+                {
+                    SelectClause = _selectClause,
+                    FromClause = _fromClause,
+                    JoinClause = _joinClause,
+                    WhereClause = _whereClause,
+                    OrderClause = _orderClause,
+                    SkipTakeClause = _skipTakeClause
+                });
         }
-        
-        public LambdyBuilder<TModel> WithTemplate(string sqlTemplate)
+
+        public ILambdyBuilder<TModel> WithTemplate(string sqlTemplate)
         {
             _customTemplate = sqlTemplate;
             return this;
         }
 
-        public LambdyBuilder<TModel> InDialect(LambdySqlDialect dialect)
+        public ILambdyBuilder<TModel> InDialect(LambdySqlDialect dialect)
         {
             _sqlDialect = dialect;
             return this;
         }
-        
-        public LambdyBuilder<TModel> Select<TSelectModel>(Expression<Func<TModel, TSelectModel>> expression)
-        {
-            _selectClause.Node = ExpressionResolverMediator
-                .ResolveExpression(expression.Body);
 
-            return this;
-        }
-        
-        public LambdyBuilder<TModel> Where(Expression<Func<TModel, bool>> expression)
-        {
-            _whereClause.Nodes
-                .Add(ExpressionResolverMediator.ResolveExpression(expression.Body));
-            
-            return this;
-        }
-
-        public LambdyBuilder<TModel> OrderBy<TKey>(Expression<Func<TModel, TKey>> expression)
-        {
-            _orderClause.Nodes = new List<OrderClauseEntryNode>()
-            {
-                new OrderClauseEntryNode()
-                {
-                    Node = ExpressionResolverMediator.ResolveExpression(expression.Body),
-                    Direction = OrderDirection.Asc
-                }
-            };
-            
-            return this;
-        }
-
-        public LambdyBuilder<TModel> ThenBy<TKey>(Expression<Func<TModel, TKey>> expression)
-        {
-            _orderClause.Nodes.Add(new OrderClauseEntryNode()
-            {
-                Direction = OrderDirection.Asc,
-                Node = ExpressionResolverMediator.ResolveExpression(expression.Body)
-            });
-
-            return this;
-        }
-        
-        public LambdyBuilder<TModel> OrderByDescending<TKey>(Expression<Func<TModel, TKey>> expression)
-        {
-            _orderClause.Nodes = new List<OrderClauseEntryNode>()
-            {
-                new OrderClauseEntryNode()
-                {
-                    Node = ExpressionResolverMediator.ResolveExpression(expression.Body),
-                    Direction = OrderDirection.Desc
-                }
-            };
-            
-            return this;
-        }
-
-        public LambdyBuilder<TModel> ThenByDescending<TKey>(Expression<Func<TModel, TKey>> expression)
-        {
-            _orderClause.Nodes.Add(new OrderClauseEntryNode()
-            {
-                Direction = OrderDirection.Desc,
-                Node = ExpressionResolverMediator.ResolveExpression(expression.Body)
-            });
-
-            return this;
-        }
-
-        public LambdyBuilder<TModel> Skip(int amount)
+        public ILambdyBuilder<TModel> Skip(int amount)
         {
             _skipTakeClause.Skip = amount;
             return this;
         }
         
-        public LambdyBuilder<TModel> Take(int amount)
+        public ILambdyBuilder<TModel> Take(int amount)
         {
             _skipTakeClause.Take = amount;
             return this;
         }
-        
+
         public LambdyResult Compile()
         {
             return _queryCompiler.Compile(new QueryCompilerInput()

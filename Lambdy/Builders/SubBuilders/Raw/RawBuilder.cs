@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Lambdy.Builders.SubBuilders.Raw.Interfaces;
 using Lambdy.Constants.Sql;
 using Lambdy.Parameters;
 using Lambdy.TreeNodes.ClauseSectionNodes;
 using Lambdy.TreeNodes.ExpressionNodes;
 
-namespace Lambdy.SubBuilders.Raw
+namespace Lambdy.Builders.SubBuilders.Raw
 {
-    public class RawBuilder<TModel> where TModel: class
+    public class RawBuilder<TModel> : IRawBuilder<TModel>
+        where TModel: class
     {
-        private readonly LambdyBuilder<TModel> _parentBuilder;
+        private readonly ILambdyBuilder<TModel> _parentBuilder;
         private readonly ParameterTracker _parentParameterTracker;
         private readonly RawBuilderClauseReferences _clauseReferences;
         
         internal RawBuilder(
-            LambdyBuilder<TModel> parentBuilder,
+            ILambdyBuilder<TModel> parentBuilder,
             ParameterTracker parameterTracker,
             RawBuilderClauseReferences references)
         {
@@ -24,7 +26,7 @@ namespace Lambdy.SubBuilders.Raw
             _clauseReferences = references;
         }
 
-        public LambdyBuilder<TModel> From(string sqlFragment)
+        public ILambdyBuilder<TModel> From(string sqlFragment)
         {
             sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.From);
             
@@ -35,7 +37,7 @@ namespace Lambdy.SubBuilders.Raw
             return _parentBuilder;
         }
         
-        public LambdyBuilder<TModel> Join(string sqlFragment)
+        public ILambdyBuilder<TModel> Join(string sqlFragment)
         {
             _clauseReferences
                 .JoinClause
@@ -45,7 +47,7 @@ namespace Lambdy.SubBuilders.Raw
             return _parentBuilder;
         }
         
-        public LambdyBuilder<TModel> Where(
+        public ILambdyBuilder<TModel> Where(
             string sqlFragment)
         {
             sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.Where);
@@ -58,7 +60,7 @@ namespace Lambdy.SubBuilders.Raw
             return _parentBuilder;
         }
         
-        public LambdyBuilder<TModel> Where(
+        public ILambdyBuilder<TModel> Where(
             string sqlFragment,
             object parameters)
         {
@@ -68,7 +70,7 @@ namespace Lambdy.SubBuilders.Raw
             return _parentBuilder;
         }
         
-        public LambdyBuilder<TModel> OrderBy(
+        public ILambdyBuilder<TModel> OrderBy(
             string sqlFragment)
         {
             sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.OrderBy);
@@ -86,7 +88,7 @@ namespace Lambdy.SubBuilders.Raw
             return _parentBuilder;
         }
         
-        public LambdyBuilder<TModel> OrderBy(
+        public ILambdyBuilder<TModel> OrderBy(
             string sqlFragment,
             object parameters)
         {

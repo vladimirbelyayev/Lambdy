@@ -17,7 +17,7 @@ namespace Lambdy.Tests.OrderBy
                 {
                     TableOne = (Person) null,
                     T = (Address) null,
-                    Table3 = (TableC) null,
+                    Table3 = (Customer) null,
                 })
                 .OrderBy(x => x.TableOne.Id)
                 .Compile();
@@ -39,7 +39,7 @@ namespace Lambdy.Tests.OrderBy
                 {
                     TableOne = (Person) null,
                     T = (Address) null,
-                    Table3 = (TableC) null,
+                    Table3 = (Customer) null,
                 })
                 .OrderBy(x => x.TableOne.Id)
                 .ThenBy(x => x.T.AddressLine2)
@@ -61,7 +61,7 @@ namespace Lambdy.Tests.OrderBy
                 {
                     TableOne = (Person) null,
                     T = (Address) null,
-                    Table3 = (TableC) null,
+                    Table3 = (Customer) null,
                 })
                 .OrderByDescending(x => x.TableOne.Id)
                 .Compile();
@@ -83,7 +83,7 @@ namespace Lambdy.Tests.OrderBy
                 {
                     TableOne = (Person) null,
                     T = (Address) null,
-                    Table3 = (TableC) null,
+                    Table3 = (Customer) null,
                 })
                 .OrderByDescending(x => x.TableOne.Id)
                 .ThenByDescending(x => x.T.AddressLine2)
@@ -108,7 +108,7 @@ namespace Lambdy.Tests.OrderBy
                 {
                     TableOne = (Person) null,
                     T = (Address) null,
-                    Table3 = (TableC) null,
+                    Table3 = (Customer) null,
                 })
                 .OrderBy(x => x.TableOne.Id)
                 .ThenByDescending(x => x.T.AddressLine2)
