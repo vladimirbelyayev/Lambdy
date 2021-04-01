@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
+using Lambdy.Performance.Benchmarks.Benchmarks.LargeJoinQuery;
 
 namespace Lambdy.Performance.Benchmarks
 {
@@ -14,7 +15,7 @@ namespace Lambdy.Performance.Benchmarks
         private static void RunBenchmarks()
         {
             // ReSharper disable once UnusedVariable
-            //var summary = BenchmarkRunner.Run<SelectBench>();
+            var summary = BenchmarkRunner.Run<LargeJoinQueryBenchmark>();
         }
 
         // ReSharper disable once UnusedMember.Local
