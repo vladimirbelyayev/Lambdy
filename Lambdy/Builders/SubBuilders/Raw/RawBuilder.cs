@@ -15,7 +15,7 @@ namespace Lambdy.Builders.SubBuilders.Raw
         private readonly ILambdyBuilder<TModel> _parentBuilder;
         private readonly ParameterTracker _parentParameterTracker;
         private readonly RawBuilderClauseReferences _clauseReferences;
-        
+
         internal RawBuilder(
             ILambdyBuilder<TModel> parentBuilder,
             ParameterTracker parameterTracker,
@@ -29,37 +29,35 @@ namespace Lambdy.Builders.SubBuilders.Raw
         public ILambdyBuilder<TModel> From(string sqlFragment)
         {
             sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.From);
-            
+
             _clauseReferences
                 .FromClause
                 .Node = new RawNode(sqlFragment);
-            
+
             return _parentBuilder;
         }
-        
+
         public ILambdyBuilder<TModel> Join(string sqlFragment)
         {
             _clauseReferences
                 .JoinClause
                 .Nodes
                 .Add(new RawNode(sqlFragment));
-            
+
             return _parentBuilder;
         }
-        
+
         public ILambdyBuilder<TModel> Where(
             string sqlFragment)
         {
-            sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.Where);
-            
             _clauseReferences
                 .WhereClause
                 .Nodes
                 .Add(new RawNode(sqlFragment));
-            
+
             return _parentBuilder;
         }
-        
+
         public ILambdyBuilder<TModel> Where(
             string sqlFragment,
             object parameters)
@@ -69,7 +67,7 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
             return _parentBuilder;
         }
-        
+
         public ILambdyBuilder<TModel> OrderBy(
             string sqlFragment)
         {
@@ -84,26 +82,26 @@ namespace Lambdy.Builders.SubBuilders.Raw
                     Node = new RawNode(sqlFragment)
                 }
             };
-            
+
             return _parentBuilder;
         }
-        
+
         public ILambdyBuilder<TModel> OrderBy(
             string sqlFragment,
             object parameters)
         {
             OrderBy(sqlFragment);
             AppendParametersFromObject(parameters);
-            
+
             return _parentBuilder;
         }
-        
+
         private string SubstringSqlClause(string sqlFragment, string clause)
         {
             var index = sqlFragment.IndexOf(
                 clause,
                 StringComparison.InvariantCultureIgnoreCase);
-            
+
             if (index >= 0)
             {
                 var substringFrom = index + clause.Length + 1;
@@ -119,7 +117,7 @@ namespace Lambdy.Builders.SubBuilders.Raw
             {
                 throw new ArgumentNullException($"{nameof(parameters)} cannot be null!");
             }
-            
+
             foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(parameters))
             {
                 var value = property.GetValue(parameters);

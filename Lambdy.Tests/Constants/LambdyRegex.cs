@@ -2,7 +2,7 @@
 {
     internal static class LambdyRegex
     {
-        public static string Params = "@p[0-9]+";
-        public static string NewLineOrWhitespace = "[\\n\\r\\s]{1,2}";
+        public const string Params = "@p[0-9]+";
+        public const string NewLineOrWhitespace = "[\\n\\r\\s]{1,2}";
     }
 }

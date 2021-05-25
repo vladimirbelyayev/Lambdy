@@ -1,6 +1,5 @@
 ﻿using System;
 using Lambdy.Tests.Casting.Models;
-using Lambdy;
 
 namespace Lambdy.Tests.Casting.Extensions
 {

@@ -11,9 +11,9 @@ namespace Lambdy.Performance.Benchmarks.Benchmarks.LargeJoinQuery
 {
     public class LargeJoinQueryBenchmark
     {
-        private static readonly int PassIterations = 10;
-        
-        private static readonly string DapperSql = @"SELECT 
+        private const int PassIterations = 1;
+
+        private const string DapperSql = @"SELECT 
                                     Product.Id AS ProductId, 
                                     OrderDetail.Id AS OrderDetailId, 
                                     OrderTable.Id AS OrderId, 
