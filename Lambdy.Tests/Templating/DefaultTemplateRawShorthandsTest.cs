@@ -14,7 +14,7 @@ namespace Lambdy.Tests.Templating
             var expectedResult = $"SELECT Table.Age AS AgeAlias{LambdyRegex.NewLineOrWhitespace}" +
                                  $"FROM Person Table{LambdyRegex.NewLineOrWhitespace}" +
                                  $"WHERE";
-            
+
             var sqlResult = LambdyQuery
                 .ByModel(new
                 {
@@ -29,7 +29,7 @@ namespace Lambdy.Tests.Templating
                 .Should()
                 .MatchRegex(expectedResult);
         }
-        
+
         [Fact]
         public void RawJoinShouldBeUsed()
         {
@@ -40,7 +40,7 @@ namespace Lambdy.Tests.Templating
                                  $"JOIN Address AddressAlias2 " +
                                  $"ON Table.PersonAddressId = AddressAlias2.Id{LambdyRegex.NewLineOrWhitespace}" +
                                  $"WHERE";
-            
+
             var sqlResult = LambdyQuery
                 .ByModel(new
                 {
@@ -59,7 +59,7 @@ namespace Lambdy.Tests.Templating
                 .Should()
                 .MatchRegex(expectedResult);
         }
-        
+
         [Fact]
         public void RawOrderByShouldBeUsed()
         {
@@ -67,7 +67,7 @@ namespace Lambdy.Tests.Templating
                                  $"JOIN Address AddressAlias " +
                                  $"ON Table.PersonAddressId = AddressAlias.Id{LambdyRegex.NewLineOrWhitespace}" +
                                  $"ORDER BY AddressAlias2.Id ASC";
-            
+
             var sqlResult = LambdyQuery
                 .ByModel(new
                 {
@@ -83,7 +83,7 @@ namespace Lambdy.Tests.Templating
                 .Should()
                 .MatchRegex(expectedResult);
         }
-        
+
         [Fact]
         public void RawWhereShouldBeUsed()
         {
@@ -92,7 +92,7 @@ namespace Lambdy.Tests.Templating
                 $"AND \\(AddressAlias.AddressLine2 = 'AA'\\)"
                 + LambdyRegex.NewLineOrWhitespace +
                 $"AND \\(AddressAlias.AddressLine1 = 'AA2'\\)";
-            
+
             var sqlResult = LambdyQuery
                 .ByModel(new
                 {
@@ -100,7 +100,7 @@ namespace Lambdy.Tests.Templating
                     AddressAlias = (Address) null,
                 })
                 .Where(x => x.AddressAlias.Id == Guid.Empty)
-                .Raw.Where("WHERE AddressAlias.AddressLine2 = 'AA'")
+                .Raw.Where("AddressAlias.AddressLine2 = 'AA'")
                 .Raw.Where("AddressAlias.AddressLine1 = 'AA2'")
                 .Compile();
 
@@ -108,7 +108,7 @@ namespace Lambdy.Tests.Templating
                 .Should()
                 .MatchRegex(expectedResult);
         }
-        
+
         [Fact]
         public void RawWhereParamShouldBeAdded()
         {
@@ -120,7 +120,7 @@ namespace Lambdy.Tests.Templating
                 })
                 .Where(x => x.AddressAlias.Id == Guid.Empty)
                 .Raw.Where(
-                    "AddressAlias.AddressLine2 = @MyParam", 
+                    "AddressAlias.AddressLine2 = @MyParam",
                     new
                     {
                         MyParam = "Hello"
@@ -131,7 +131,7 @@ namespace Lambdy.Tests.Templating
                 .Should()
                 .ContainKey("@MyParam");
         }
-        
+
         [Fact]
         public void RawOrderByParamShouldBeAdded()
         {
